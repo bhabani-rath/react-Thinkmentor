@@ -973,7 +973,7 @@ const UsersAndRoles = () => {
             {activeTab === "user" ? (
               <>
                 <div className="flex items-center gap-4 pb-4 border-b border-gray-200 dark:border-dark-border">
-                  <div className="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center">
+                  <div className="w-14 h-14 bg-linear-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center">
                     <span className="text-white text-lg font-bold">
                       {selectedItem.name
                         ?.split(" ")
