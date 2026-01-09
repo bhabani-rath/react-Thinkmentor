@@ -1,27 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import Dashboard from "./pages/Dashboard";
-import UsersAndRoles from "./pages/UsersAndRoles";
-import DataHub from "./pages/DataHub";
+import Dashboard from "./pages/SuperAdmin/Dashboard";
+import UsersAndRoles from "./pages/SuperAdmin/UsersAndRoles";
+import DataHub from "./pages/SuperAdmin/DataHub";
+import Syllabus from "./pages/SuperAdmin/Syllabus";
+import Settings from "./pages/SuperAdmin/Settings";
 import DashboardLayout from "./components/layout/DashboardLayout";
 import "./App.css";
-
-const Syllabus = () => (
-  <div style={{ fontFamily: "'Inter', sans-serif" }}>
-    <h1 className="text-2xl font-bold text-gray-900 mb-1">
-      Syllabus Management
-    </h1>
-    <p className="text-gray-500">Create and manage course syllabi.</p>
-  </div>
-);
-
-const Settings = () => (
-  <div style={{ fontFamily: "'Inter', sans-serif" }}>
-    <h1 className="text-2xl font-bold text-gray-900 mb-1">Settings</h1>
-    <p className="text-gray-500">Configure your application settings.</p>
-  </div>
-);
 
 function App() {
   return (

@@ -1,173 +1,328 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import {
+  FiMenu,
+  FiSearch,
+  FiGlobe,
+  FiBell,
+  FiUser,
+  FiChevronDown,
+  FiSun,
+  FiMoon,
+  FiSettings,
+  FiLogOut,
+  FiCheck,
+} from "react-icons/fi";
+import { useTheme } from "../../context/ThemeContext";
 
-const MenuIcon = () => (
-  <svg
-    className="w-6 h-6"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M4 6h16M4 12h16M4 18h16"
-    />
-  </svg>
-);
+// Map routes to section names
+const routeToSection = {
+  "/dashboard": "Dashboard",
+  "/data-hub": "Data Hub",
+  "/syllabus": "Syllabus Management",
+  "/users-roles": "Users & Roles",
+  "/settings": "Settings",
+};
 
-const SearchIcon = () => (
-  <svg
-    className="w-5 h-5"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-    />
-  </svg>
-);
+const languages = [
+  { code: "en", name: "English", flag: "🇺🇸" },
+  { code: "hi", name: "हिंदी", flag: "🇮🇳" },
+  { code: "ta", name: "தமிழ்", flag: "🇮🇳" },
+  { code: "te", name: "తెలుగు", flag: "🇮🇳" },
+];
 
-const GlobeIcon = () => (
-  <svg
-    className="w-5 h-5"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <circle cx="12" cy="12" r="10" strokeWidth={2} />
-    <line x1="2" y1="12" x2="22" y2="12" strokeWidth={2} />
-    <path
-      strokeWidth={2}
-      d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-    />
-  </svg>
-);
+const notifications = [
+  {
+    id: 1,
+    title: "New user registered",
+    message: "John Doe has registered as a teacher",
+    time: "5 min ago",
+    unread: true,
+  },
+  {
+    id: 2,
+    title: "System update",
+    message: "Platform will undergo maintenance at 2 AM",
+    time: "1 hour ago",
+    unread: true,
+  },
+  {
+    id: 3,
+    title: "Course approved",
+    message: "Mathematics Grade 10 syllabus has been approved",
+    time: "3 hours ago",
+    unread: false,
+  },
+];
 
-const BellIcon = () => (
-  <svg
-    className="w-5 h-5"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-    />
-  </svg>
-);
+const Header = ({ onMenuClick, isSidebarExpanded }) => {
+  const { isDarkMode, toggleTheme } = useTheme();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-const UserIcon = () => (
-  <svg
-    className="w-5 h-5"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-    />
-  </svg>
-);
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
+  const [isNotifDropdownOpen, setIsNotifDropdownOpen] = useState(false);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
-const ChevronDownIcon = () => (
-  <svg
-    className="w-4 h-4"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M19 9l-7 7-7-7"
-    />
-  </svg>
-);
+  const langDropdownRef = useRef(null);
+  const notifDropdownRef = useRef(null);
+  const profileDropdownRef = useRef(null);
 
-const Header = ({ onMenuClick, isSidebarCollapsed }) => {
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        langDropdownRef.current &&
+        !langDropdownRef.current.contains(event.target)
+      ) {
+        setIsLangDropdownOpen(false);
+      }
+      if (
+        notifDropdownRef.current &&
+        !notifDropdownRef.current.contains(event.target)
+      ) {
+        setIsNotifDropdownOpen(false);
+      }
+      if (
+        profileDropdownRef.current &&
+        !profileDropdownRef.current.contains(event.target)
+      ) {
+        setIsProfileDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Get current section name based on route
+  const currentSection = routeToSection[location.pathname] || "Dashboard";
+  const currentLang = languages.find((l) => l.code === selectedLanguage);
+  const unreadCount = notifications.filter((n) => n.unread).length;
+
+  const handleLanguageChange = (langCode) => {
+    setSelectedLanguage(langCode);
+    setIsLangDropdownOpen(false);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      console.log("Searching for:", searchQuery);
+      // Implement search functionality here
+    }
+  };
+
+  const handleLogout = () => {
+    setIsProfileDropdownOpen(false);
+    navigate("/login");
+  };
+
   return (
     <header
-      className={`fixed top-0 right-0 h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 z-30 transition-all duration-300 ${
-        isSidebarCollapsed ? "left-[72px]" : "left-[260px]"
+      className={`fixed top-0 right-0 h-14 phablet:h-16 bg-white dark:bg-dark-surface border-b border-gray-200 dark:border-dark-border flex items-center justify-between px-3 phablet:px-4 z-30 transition-all duration-300 left-0 ${
+        isSidebarExpanded ? "laptop:left-[260px]" : "laptop:left-[72px]"
       }`}
       style={{ fontFamily: "'Inter', sans-serif" }}
     >
       {/* Left Section */}
-      <div className="flex items-center gap-4">
-        {/* Hamburger Menu */}
+      <div className="flex items-center gap-2 phablet:gap-4">
         <button
           onClick={onMenuClick}
-          className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+          className="p-2 text-gray-600 dark:text-dark-text-secondary hover:text-gray-900 dark:hover:text-dark-text hover:bg-gray-100 dark:hover:bg-dark-surface-hover rounded-lg transition-colors"
+          title="Toggle Sidebar"
         >
-          <MenuIcon />
+          <FiMenu className="w-5 h-5 phablet:w-6 phablet:h-6" />
         </button>
 
-        {/* Logo */}
-        <div className="flex items-center gap-2">
-          <div className="w-9 h-9 bg-amber-500 rounded-xl flex items-center justify-center shadow-md shadow-amber-500/20">
-            <svg
-              className="w-5 h-5 text-white"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7zm2.9 11.1l-.9.6V16h-4v-2.3l-.9-.6C7.8 12.2 7 10.6 7 9c0-2.8 2.2-5 5-5s5 2.2 5 5c0 1.6-.8 3.2-2.1 4.1z" />
-            </svg>
-          </div>
-          <span className="text-lg font-bold text-gray-900">
-            Think
-            <span className="text-primary px-1 py-0.5 rounded-md ml-0.5">
-              Mentor
-            </span>
-          </span>
-        </div>
+        {/* Current Section Name - Hidden on very small screens */}
+        <h1 className="text-base phablet:text-lg tablet:text-xl font-semibold text-gray-900 dark:text-dark-text truncate max-w-[120px] phablet:max-w-none">
+          {currentSection}
+        </h1>
       </div>
 
-      {/* Center - Search */}
-      <div className="flex-1 max-w-xl mx-8">
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
-            <SearchIcon />
+      {/* Center - Search - Hidden on mobile, shown on tablet+ */}
+      <form
+        onSubmit={handleSearch}
+        className="hidden tablet:flex flex-1 max-w-xl mx-4 laptop:mx-8"
+      >
+        <div className="relative w-full">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 dark:text-dark-text-muted">
+            <FiSearch className="w-5 h-5" />
           </div>
           <input
             type="text"
-            placeholder="Search"
-            className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search..."
+            className="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-dark-input border border-gray-200 dark:border-dark-border rounded-lg text-sm text-gray-900 dark:text-dark-text placeholder-gray-400 dark:placeholder-dark-text-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
           />
         </div>
-      </div>
+      </form>
 
       {/* Right Section */}
-      <div className="flex items-center gap-3">
-        {/* Language Dropdown */}
-        <button className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
-          <GlobeIcon />
-          <span className="text-sm font-medium">English</span>
-          <ChevronDownIcon />
+      <div className="flex items-center gap-2">
+        {/* Theme Toggle */}
+        <button
+          onClick={toggleTheme}
+          className="p-2 text-gray-600 dark:text-dark-text-secondary hover:text-gray-900 dark:hover:text-dark-text hover:bg-gray-100 dark:hover:bg-dark-surface-hover rounded-lg transition-colors"
+          title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        >
+          {isDarkMode ? (
+            <FiSun className="w-5 h-5" />
+          ) : (
+            <FiMoon className="w-5 h-5" />
+          )}
         </button>
+
+        {/* Language Selector */}
+        <div className="relative" ref={langDropdownRef}>
+          <button
+            onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
+            className="flex items-center gap-2 px-3 py-2 text-gray-600 dark:text-dark-text-secondary hover:text-gray-900 dark:hover:text-dark-text hover:bg-gray-100 dark:hover:bg-dark-surface-hover rounded-lg transition-colors"
+          >
+            <FiGlobe className="w-5 h-5" />
+            <span className="text-sm font-medium">{currentLang?.name}</span>
+            <FiChevronDown
+              className={`w-4 h-4 transition-transform ${
+                isLangDropdownOpen ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {isLangDropdownOpen && (
+            <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-dark-border shadow-lg py-2 z-50">
+              {languages.map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => handleLanguageChange(lang.code)}
+                  className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-gray-700 dark:text-dark-text hover:bg-gray-50 dark:hover:bg-dark-bg transition-colors"
+                >
+                  <span className="flex items-center gap-2">
+                    <span>{lang.flag}</span>
+                    <span>{lang.name}</span>
+                  </span>
+                  {selectedLanguage === lang.code && (
+                    <FiCheck className="w-4 h-4 text-indigo-600" />
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* Notifications */}
-        <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors relative">
-          <BellIcon />
-        </button>
+        <div className="relative" ref={notifDropdownRef}>
+          <button
+            onClick={() => setIsNotifDropdownOpen(!isNotifDropdownOpen)}
+            className="p-2 text-gray-600 dark:text-dark-text-secondary hover:text-gray-900 dark:hover:text-dark-text hover:bg-gray-100 dark:hover:bg-dark-surface-hover rounded-lg transition-colors relative"
+          >
+            <FiBell className="w-5 h-5" />
+            {unreadCount > 0 && (
+              <span className="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                {unreadCount}
+              </span>
+            )}
+          </button>
+
+          {isNotifDropdownOpen && (
+            <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-dark-border shadow-lg z-50 overflow-hidden">
+              <div className="px-4 py-3 border-b border-gray-200 dark:border-dark-border flex items-center justify-between">
+                <h3 className="font-semibold text-gray-900 dark:text-dark-text">
+                  Notifications
+                </h3>
+                {unreadCount > 0 && (
+                  <span className="text-xs text-indigo-600 dark:text-indigo-400 font-medium">
+                    {unreadCount} new
+                  </span>
+                )}
+              </div>
+              <div className="max-h-80 overflow-y-auto">
+                {notifications.map((notif) => (
+                  <div
+                    key={notif.id}
+                    className={`px-4 py-3 border-b border-gray-100 dark:border-dark-border hover:bg-gray-50 dark:hover:bg-dark-bg cursor-pointer transition-colors ${
+                      notif.unread ? "bg-indigo-50/50 dark:bg-indigo-500/5" : ""
+                    }`}
+                  >
+                    <div className="flex items-start gap-3">
+                      <div
+                        className={`w-2 h-2 rounded-full mt-2 ${
+                          notif.unread ? "bg-indigo-500" : "bg-gray-300"
+                        }`}
+                      />
+                      <div className="flex-1">
+                        <p className="text-sm font-medium text-gray-900 dark:text-dark-text">
+                          {notif.title}
+                        </p>
+                        <p className="text-xs text-gray-500 dark:text-dark-text-secondary mt-0.5">
+                          {notif.message}
+                        </p>
+                        <p className="text-xs text-gray-400 dark:text-dark-text-muted mt-1">
+                          {notif.time}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="px-4 py-3 border-t border-gray-200 dark:border-dark-border">
+                <button className="w-full text-center text-sm text-indigo-600 dark:text-indigo-400 font-medium hover:underline">
+                  View all notifications
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
 
         {/* User Profile */}
-        <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors">
-          <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-            <UserIcon />
-          </div>
-        </button>
+        <div className="relative" ref={profileDropdownRef}>
+          <button
+            onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
+            className="p-1 text-gray-600 dark:text-dark-text-secondary hover:text-gray-900 dark:hover:text-dark-text rounded-full transition-colors"
+          >
+            <div className="w-9 h-9 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center ring-2 ring-white dark:ring-dark-surface">
+              <span className="text-white text-sm font-semibold">SA</span>
+            </div>
+          </button>
+
+          {isProfileDropdownOpen && (
+            <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-dark-border shadow-lg z-50 overflow-hidden">
+              {/* User Info */}
+              <div className="px-4 py-3 border-b border-gray-200 dark:border-dark-border">
+                <p className="font-medium text-gray-900 dark:text-dark-text">
+                  Super Admin
+                </p>
+                <p className="text-sm text-gray-500 dark:text-dark-text-secondary">
+                  admin@thinkmentor.com
+                </p>
+              </div>
+
+              {/* Menu Items */}
+              <div className="py-2">
+                <button
+                  onClick={() => {
+                    setIsProfileDropdownOpen(false);
+                    navigate("/settings");
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-dark-text hover:bg-gray-50 dark:hover:bg-dark-bg transition-colors"
+                >
+                  <FiSettings className="w-4 h-4" />
+                  Settings
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors"
+                >
+                  <FiLogOut className="w-4 h-4" />
+                  Logout
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

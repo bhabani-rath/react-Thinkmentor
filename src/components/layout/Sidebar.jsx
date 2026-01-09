@@ -107,22 +107,49 @@ const menuItems = [
   },
 ];
 
-const Sidebar = ({ isCollapsed }) => {
+const Sidebar = ({ isCollapsed, isExpanded, onMouseEnter, onMouseLeave }) => {
   const location = useLocation();
 
   return (
     <aside
       className={`fixed left-0 top-0 h-full bg-sidebar-bg text-white transition-all duration-300 ease-in-out z-40 flex flex-col ${
-        isCollapsed ? "w-[72px]" : "w-[260px]"
+        isExpanded ? "w-[260px]" : "w-[72px]"
       }`}
       style={{ fontFamily: "'Inter', sans-serif" }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
+      {/* Brand Header */}
+      <div className="h-16 flex items-center px-4 border-b border-gray-700/50">
+        <div
+          className={`flex items-center gap-3 ${
+            !isExpanded ? "justify-center w-full" : ""
+          }`}
+        >
+          <div className="w-9 h-9 bg-amber-500 rounded-xl flex items-center justify-center shadow-md shadow-amber-500/20 shrink-0">
+            <svg
+              className="w-5 h-5 text-white"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7zm2.9 11.1l-.9.6V16h-4v-2.3l-.9-.6C7.8 12.2 7 10.6 7 9c0-2.8 2.2-5 5-5s5 2.2 5 5c0 1.6-.8 3.2-2.1 4.1z" />
+            </svg>
+          </div>
+          {isExpanded && (
+            <span className="text-lg font-bold text-white">
+              Think
+              <span className="text-amber-400">Mentor</span>
+            </span>
+          )}
+        </div>
+      </div>
+
       {/* Navigation */}
       <nav className="flex-1 py-4 overflow-y-auto">
         {menuItems.map((section, sectionIndex) => (
           <div key={section.section} className={sectionIndex > 0 ? "mt-6" : ""}>
             {/* Section Label */}
-            {!isCollapsed && (
+            {isExpanded && (
               <div className="px-6 py-2">
                 <span className="text-[10px] font-semibold tracking-wider text-gray-400 uppercase">
                   {section.section}
@@ -144,11 +171,11 @@ const Sidebar = ({ isCollapsed }) => {
                       isActive
                         ? "bg-linear-to-r from-indigo-600 to-indigo-500 text-white shadow-lg shadow-indigo-500/30"
                         : "text-gray-300 hover:bg-sidebar-hover hover:text-white"
-                    } ${isCollapsed ? "justify-center" : ""}`}
-                    title={isCollapsed ? item.name : ""}
+                    } ${!isExpanded ? "justify-center" : ""}`}
+                    title={!isExpanded ? item.name : ""}
                   >
                     <Icon />
-                    {!isCollapsed && (
+                    {isExpanded && (
                       <span className="text-sm font-medium whitespace-nowrap">
                         {item.name}
                       </span>
@@ -161,17 +188,29 @@ const Sidebar = ({ isCollapsed }) => {
         ))}
       </nav>
 
-      {/* Language Selector */}
+      {/* User Profile */}
       <div className="p-3 border-t border-gray-700/50">
-        <button
-          className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-sidebar-hover hover:text-white transition-all duration-200 w-full ${
-            isCollapsed ? "justify-center" : ""
+        <div
+          className={`flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-sidebar-hover transition-all duration-200 cursor-pointer ${
+            !isExpanded ? "justify-center" : ""
           }`}
-          title={isCollapsed ? "English" : ""}
+          title={!isExpanded ? "Super Admin" : ""}
         >
-          <GlobeIcon />
-          {!isCollapsed && <span className="text-sm font-medium">English</span>}
-        </button>
+          {/* Profile Picture */}
+          <div className="w-9 h-9 rounded-full bg-linear-to-br from-indigo-500 to-purple-600 flex items-center justify-center shrink-0 ring-2 ring-indigo-400/30">
+            <span className="text-white text-sm font-semibold">SA</span>
+          </div>
+
+          {/* Name and Role */}
+          {isExpanded && (
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-white truncate">
+                Super Admin
+              </p>
+              <p className="text-xs text-gray-400 truncate">Administrator</p>
+            </div>
+          )}
+        </div>
       </div>
     </aside>
   );
