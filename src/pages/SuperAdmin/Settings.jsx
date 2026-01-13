@@ -340,7 +340,7 @@ const Settings = () => {
             Configure your platform settings and preferences.
           </p>
         </div>
-        <button className="flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white rounded-lg hover:from-indigo-700 hover:to-indigo-600 transition-all duration-200 shadow-lg shadow-indigo-500/30 w-full phablet:w-auto">
+        <button className="flex items-center justify-center gap-2 px-4 py-2.5 bg-linear-to-r from-indigo-600 to-indigo-500 text-white rounded-lg hover:from-indigo-700 hover:to-indigo-600 transition-all duration-200 shadow-lg shadow-indigo-500/30 w-full phablet:w-auto">
           <FiSave className="w-4 h-4" />
           <span className="font-medium">Save Changes</span>
         </button>
@@ -349,7 +349,7 @@ const Settings = () => {
       {/* Tabs and Content */}
       <div className="flex flex-col tablet:flex-row gap-4 phablet:gap-6">
         {/* Sidebar Tabs - Horizontal on mobile, vertical on tablet+ */}
-        <div className="tablet:w-56 laptop:w-64 flex-shrink-0">
+        <div className="tablet:w-56 laptop:w-64 shrink-0">
           <div className="bg-white dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-dark-border p-1.5 phablet:p-2">
             <div className="flex tablet:flex-col gap-1 overflow-x-auto tablet:overflow-x-visible pb-1 tablet:pb-0">
               {tabs.map((tab) => {

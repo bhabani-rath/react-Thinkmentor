@@ -1,0 +1,280 @@
+// English translations
+const en = {
+  // Common
+  common: {
+    search: "Search...",
+    save: "Save",
+    cancel: "Cancel",
+    delete: "Delete",
+    edit: "Edit",
+    add: "Add",
+    view: "View",
+    close: "Close",
+    loading: "Loading...",
+    noData: "No data available",
+    actions: "Actions",
+    status: "Status",
+    active: "Active",
+    inactive: "Inactive",
+    name: "Name",
+    email: "Email",
+    role: "Role",
+    filter: "Filter",
+    filters: "Filters",
+    all: "All",
+    confirm: "Confirm",
+    create: "Create",
+    update: "Update",
+    reset: "Reset",
+    action: "Action",
+    description: "Description",
+    activeFilters: "Active filters",
+    userId: "User ID",
+    userName: "User Name",
+    emailId: "Email ID",
+    roleName: "Role Name",
+    topic: "Topic",
+    resources: "Resources",
+    duration: "Duration",
+    progress: "Progress",
+    subjects: "Subjects",
+    year: "Year",
+    // Modal labels
+    saveChanges: "Save Changes",
+    addNew: "Add New",
+    viewDetails: "View Details",
+    editDetails: "Edit",
+    deleteConfirm:
+      "Are you sure you want to delete this? This action cannot be undone.",
+    deleteTitle: "Delete",
+    enterField: "Enter",
+    selectStatus: "Select Status",
+    password: "Password",
+    confirmPassword: "Confirm Password",
+    phone: "Phone",
+    address: "Address",
+  },
+
+  // Navigation
+  nav: {
+    dashboard: "Dashboard",
+    dataHub: "Data Hub",
+    syllabus: "Syllabus",
+    usersRoles: "Users & Roles",
+    settings: "Settings",
+    logout: "Logout",
+  },
+
+  // Sections
+  sections: {
+    main: "MAIN",
+    content: "CONTENT",
+    management: "MANAGEMENT",
+    overview: "OVERVIEW",
+    masterData: "MASTER DATA",
+    administration: "ADMINISTRATION",
+  },
+
+  // Dashboard
+  dashboard: {
+    title: "Dashboard",
+    welcome: "Welcome to ThinkMentor admin dashboard.",
+    totalUsers: "Total Users",
+    activeUsers: "Active Users",
+    totalCourses: "Total Courses",
+    completionRate: "Completion Rate",
+    recentActivity: "Recent Activity",
+    contentPlaceholder: "Dashboard content will be displayed here.",
+  },
+
+  // Data Hub
+  dataHub: {
+    title: "Master Data Hub",
+    description: "Central repository for all educational content organization.",
+    boards: "Boards",
+    classes: "Classes",
+    topics: "Topics",
+    chapters: "Chapters",
+    syllabus: "Syllabus",
+    addEntry: "Add Entry",
+    searchPlaceholder: "Search...",
+    board: "Board",
+    class: "Class",
+    subject: "Subject",
+    chapter: "Chapter",
+    sections: "Sections",
+    students: "Students",
+    teachers: "Teachers",
+    viewEntry: "View Entry",
+    editEntry: "Edit Entry",
+    deleteEntry: "Delete Entry",
+    noEntries: "No entries found",
+    boardsData: "Boards Data",
+    boardsDescription:
+      "Manage syllabus content by Board, Class, Subject, and Chapter",
+    classesData: "Classes Data",
+    classesDescription: "Manage class levels and their configurations",
+    topicsData: "Topics Data",
+    topicsDescription: "Manage topics and their learning materials",
+    chaptersData: "Chapters Data",
+    chaptersDescription: "Manage chapters and their topic organization",
+    syllabusData: "Syllabus Data",
+    syllabusDescription: "Manage syllabus structure and curriculum mapping",
+  },
+
+  // Syllabus
+  syllabus: {
+    title: "Syllabus Management",
+    description:
+      "Create and manage course syllabi across all grades and subjects.",
+    createNew: "Create New Syllabus",
+    totalSyllabi: "Total Syllabi",
+    published: "Published",
+    underReview: "Under Review",
+    draft: "Draft",
+    totalChapters: "Total Chapters",
+    grade: "Grade",
+    curriculum: "Curriculum",
+    totalHours: "Total Hours",
+    lastUpdated: "Last Updated",
+    assignedTeachers: "Assigned Teachers",
+    viewSyllabus: "View Syllabus",
+    editSyllabus: "Edit Syllabus",
+    deleteSyllabus: "Delete Syllabus",
+    noSyllabus: "No syllabus found",
+    allSubjects: "All Subjects",
+    allGrades: "All Grades",
+  },
+
+  // Users & Roles
+  usersRoles: {
+    title: "Users & Roles",
+    description: "Manage platform users and their access permissions.",
+    userManagement: "User Management",
+    roleManagement: "Role Management",
+    addUser: "Add User",
+    addRole: "Add Role",
+    editUser: "Edit User",
+    editRole: "Edit Role",
+    deleteUser: "Delete User",
+    deleteRole: "Delete Role",
+    viewUser: "View User Details",
+    viewRole: "View Role Details",
+    permissions: "Permissions",
+    createdOn: "Created On",
+    lastUpdatedOn: "Last Updated On",
+    fullAccess: "Full Access",
+    contentManagement: "Content Management",
+    readOnly: "Read Only",
+    viewReports: "View Reports",
+    manageProfile: "Manage Profile",
+    admin: "Admin",
+    teacher: "Teacher",
+    student: "Student",
+    parent: "Parent",
+    noUsers: "No users found",
+    noRoles: "No roles found",
+    userDescription: "Manage and configure user accounts and permissions.",
+    roleDescription: "Create and manage roles with specific permissions.",
+  },
+
+  // Settings
+  settings: {
+    title: "Settings",
+    description: "Configure your platform settings and preferences.",
+    saveChanges: "Save Changes",
+    general: "General",
+    security: "Security",
+    notifications: "Notifications",
+    system: "System",
+    platformName: "Platform Name",
+    supportEmail: "Support Email",
+    timezone: "Timezone",
+    language: "Default Language",
+  },
+
+  // Header
+  header: {
+    toggleSidebar: "Toggle Sidebar",
+    lightMode: "Switch to Light Mode",
+    darkMode: "Switch to Dark Mode",
+    notifications: "Notifications",
+    profile: "Profile",
+    viewAll: "View All",
+    markAllRead: "Mark all as read",
+  },
+
+  // Languages
+  languages: {
+    english: "English",
+    hindi: "हिंदी",
+    odia: "ଓଡ଼ିଆ",
+  },
+
+  // User
+  user: {
+    superAdmin: "Super Admin",
+    administrator: "Administrator",
+  },
+
+  // Table
+  table: {
+    showing: "Showing",
+    of: "of",
+    entries: "entries",
+    previous: "Previous",
+    next: "Next",
+    noResults: "No results found",
+  },
+
+  // Data Values (for cell data translation)
+  data: {
+    // Boards
+    cbse: "CBSE",
+    icse: "ICSE",
+    stateBoard: "State Board",
+    // Classes
+    class9: "Class 9",
+    class10: "Class 10",
+    class11: "Class 11",
+    class12: "Class 12",
+    // Subjects
+    science: "Science",
+    mathematics: "Mathematics",
+    physics: "Physics",
+    chemistry: "Chemistry",
+    biology: "Biology",
+    english: "English",
+    // Chapters
+    chemicalReactions: "Chemical Reactions",
+    algebra: "Algebra",
+    motion: "Motion",
+    organicChemistry: "Organic Chemistry",
+    cellStructure: "Cell Structure",
+    light: "Light",
+    // Status
+    active: "Active",
+    inactive: "Inactive",
+    published: "Published",
+    draft: "Draft",
+    underReview: "Under Review",
+    // Grades
+    grade9: "Grade 9",
+    grade10: "Grade 10",
+    grade11: "Grade 11",
+    grade12: "Grade 12",
+    // Roles
+    admin: "Admin",
+    teacher: "Teacher",
+    student: "Student",
+    parent: "Parent",
+    administrator: "Administrator",
+    // Permissions
+    fullAccess: "Full Access",
+    contentManagement: "Content Management",
+    readOnly: "Read Only",
+    reportsAnalytics: "Reports & Analytics",
+  },
+};
+
+export default en;

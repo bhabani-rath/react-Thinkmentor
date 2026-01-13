@@ -14,8 +14,10 @@ import {
   FiBookOpen,
 } from "react-icons/fi";
 import Modal from "../../components/ui/Modal";
+import { useLanguage } from "../../context/LanguageContext";
 
 const Syllabus = () => {
+  const { t, translateData } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSubject, setSelectedSubject] = useState("all");
   const [selectedGrade, setSelectedGrade] = useState("all");
@@ -416,7 +418,7 @@ const Syllabus = () => {
         </button>
         <button
           type="submit"
-          className="px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white rounded-lg hover:from-indigo-700 hover:to-indigo-600 transition-all font-medium shadow-lg shadow-indigo-500/30"
+          className="px-4 py-2.5 bg-linear-to-r from-indigo-600 to-indigo-500 text-white rounded-lg hover:from-indigo-700 hover:to-indigo-600 transition-all font-medium shadow-lg shadow-indigo-500/30"
         >
           {submitLabel}
         </button>
@@ -430,18 +432,18 @@ const Syllabus = () => {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-dark-text mb-1">
-            Syllabus Management
+            {t("syllabus.title")}
           </h1>
           <p className="text-gray-500 dark:text-dark-text-secondary">
-            Create and manage course syllabi across all grades and subjects.
+            {t("syllabus.description")}
           </p>
         </div>
         <button
           onClick={handleOpenCreate}
-          className="mt-4 md:mt-0 flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white rounded-lg hover:from-indigo-700 hover:to-indigo-600 transition-all duration-200 shadow-lg shadow-indigo-500/30"
+          className="mt-4 md:mt-0 flex items-center gap-2 px-4 py-2.5 bg-linear-to-r from-indigo-600 to-indigo-500 text-white rounded-lg hover:from-indigo-700 hover:to-indigo-600 transition-all duration-200 shadow-lg shadow-indigo-500/30"
         >
           <FiPlus className="w-4 h-4" />
-          <span className="font-medium">Create New Syllabus</span>
+          <span className="font-medium">{t("syllabus.createNew")}</span>
         </button>
       </div>
 
@@ -539,28 +541,28 @@ const Syllabus = () => {
             <thead className="bg-gray-50 dark:bg-dark-bg border-b border-gray-200 dark:border-dark-border">
               <tr>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-dark-text-secondary uppercase tracking-wider">
-                  Subject
+                  {t("dataHub.subject")}
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-dark-text-secondary uppercase tracking-wider">
-                  Grade / Curriculum
+                  {t("syllabus.grade")} / {t("syllabus.curriculum")}
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-dark-text-secondary uppercase tracking-wider">
-                  Chapters
+                  {t("dataHub.chapters")}
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-dark-text-secondary uppercase tracking-wider">
-                  Hours
+                  {t("syllabus.totalHours")}
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-dark-text-secondary uppercase tracking-wider">
-                  Teachers
+                  {t("dataHub.teachers")}
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-dark-text-secondary uppercase tracking-wider">
-                  Status
+                  {t("common.status")}
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-dark-text-secondary uppercase tracking-wider">
-                  Last Updated
+                  {t("syllabus.lastUpdated")}
                 </th>
                 <th className="px-6 py-4 text-right text-xs font-semibold text-gray-500 dark:text-dark-text-secondary uppercase tracking-wider">
-                  Actions
+                  {t("common.actions")}
                 </th>
               </tr>
             </thead>
@@ -606,7 +608,7 @@ const Syllabus = () => {
                         syllabus.status
                       )}`}
                     >
-                      {syllabus.status}
+                      {translateData(syllabus.status)}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-gray-500 dark:text-dark-text-secondary text-sm">
@@ -774,12 +776,12 @@ const Syllabus = () => {
       <Modal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
-        title="Create New Syllabus"
+        title={t("syllabus.createNew")}
         size="lg"
       >
         <SyllabusForm
           onSubmit={handleCreateSyllabus}
-          submitLabel="Create Syllabus"
+          submitLabel={t("syllabus.createNew")}
         />
       </Modal>
 
@@ -787,12 +789,12 @@ const Syllabus = () => {
       <Modal
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
-        title="Edit Syllabus"
+        title={`${t("common.edit")} ${t("nav.syllabus")}`}
         size="lg"
       >
         <SyllabusForm
           onSubmit={handleUpdateSyllabus}
-          submitLabel="Update Syllabus"
+          submitLabel={`${t("common.update")} ${t("nav.syllabus")}`}
         />
       </Modal>
 
@@ -800,7 +802,7 @@ const Syllabus = () => {
       <Modal
         isOpen={isViewModalOpen}
         onClose={() => setIsViewModalOpen(false)}
-        title="Syllabus Details"
+        title={`${t("common.viewDetails")} - ${t("nav.syllabus")}`}
         size="md"
       >
         {selectedSyllabus && (
@@ -871,16 +873,16 @@ const Syllabus = () => {
                 onClick={() => setIsViewModalOpen(false)}
                 className="px-4 py-2.5 text-gray-700 dark:text-dark-text bg-gray-100 dark:bg-dark-bg hover:bg-gray-200 dark:hover:bg-dark-border rounded-lg font-medium transition-colors"
               >
-                Close
+                {t("common.close")}
               </button>
               <button
                 onClick={() => {
                   setIsViewModalOpen(false);
                   handleEdit(selectedSyllabus);
                 }}
-                className="px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white rounded-lg hover:from-indigo-700 hover:to-indigo-600 transition-all font-medium"
+                className="px-4 py-2.5 bg-linear-to-r from-indigo-600 to-indigo-500 text-white rounded-lg hover:from-indigo-700 hover:to-indigo-600 transition-all font-medium"
               >
-                Edit Syllabus
+                {t("syllabus.editSyllabus")}
               </button>
             </div>
           </div>
@@ -891,7 +893,7 @@ const Syllabus = () => {
       <Modal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
-        title="Delete Syllabus"
+        title={t("syllabus.deleteSyllabus")}
         size="sm"
       >
         <div className="text-center">
@@ -899,24 +901,23 @@ const Syllabus = () => {
             <FiTrash2 className="w-8 h-8 text-red-600 dark:text-red-400" />
           </div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-text mb-2">
-            Delete "{selectedSyllabus?.subject}"?
+            {t("common.deleteTitle")} "{selectedSyllabus?.subject}"?
           </h3>
           <p className="text-gray-500 dark:text-dark-text-secondary mb-6">
-            This action cannot be undone. This will permanently delete the
-            syllabus and all associated data.
+            {t("common.deleteConfirm")}
           </p>
           <div className="flex justify-center gap-3">
             <button
               onClick={() => setIsDeleteModalOpen(false)}
               className="px-4 py-2.5 text-gray-700 dark:text-dark-text bg-gray-100 dark:bg-dark-bg hover:bg-gray-200 dark:hover:bg-dark-border rounded-lg font-medium transition-colors"
             >
-              Cancel
+              {t("common.cancel")}
             </button>
             <button
               onClick={handleDeleteSyllabus}
               className="px-4 py-2.5 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
             >
-              Delete
+              {t("common.delete")}
             </button>
           </div>
         </div>

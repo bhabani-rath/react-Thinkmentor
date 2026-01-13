@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/SuperAdmin/Dashboard";
 import UsersAndRoles from "./pages/SuperAdmin/UsersAndRoles";
 import DataHub from "./pages/SuperAdmin/DataHub";
@@ -13,18 +14,18 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Auth Routes */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        {/* Public Routes */}
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
 
-        {/* Dashboard Routes */}
+        {/* Super Admin Routes */}
         <Route element={<DashboardLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/data-hub" element={<DataHub />} />
-          <Route path="/syllabus" element={<Syllabus />} />
-          <Route path="/users-roles" element={<UsersAndRoles />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/superadmin/dashboard" element={<Dashboard />} />
+          <Route path="/superadmin/data-hub" element={<DataHub />} />
+          <Route path="/superadmin/syllabus" element={<Syllabus />} />
+          <Route path="/superadmin/users-roles" element={<UsersAndRoles />} />
+          <Route path="/superadmin/settings" element={<Settings />} />
         </Route>
       </Routes>
     </BrowserRouter>

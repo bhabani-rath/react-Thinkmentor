@@ -39,4 +39,12 @@
   --color-dark-text-secondary: #a0a0b8;
   --color-dark-text-muted: #6b6b80;
   --color-dark-input: #1f1f35;
+
+  /* Light mode colors - professional white/gray palette */
+  --color-light-bg: #f8f9fc;
+  --color-light-surface: #ffffff;
+  --color-light-surface-alt: #f3f4f8;
+  --color-light-surface-hover: #eef0f5;
+  --color-light-border: #e2e4eb;
+  --color-light-border-light: #eceef3;
 }

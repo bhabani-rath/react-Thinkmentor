@@ -10,6 +10,7 @@ import {
   FiChevronDown,
   FiFilter,
 } from "react-icons/fi";
+import { useLanguage } from "../../context/LanguageContext";
 
 const initialUsers = [
   {
@@ -120,6 +121,7 @@ const availablePermissions = [
 ];
 
 const UsersAndRoles = () => {
+  const { t, translateData } = useLanguage();
   const [activeTab, setActiveTab] = useState("user");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedUsers, setSelectedUsers] = useState([]);
@@ -420,10 +422,10 @@ const UsersAndRoles = () => {
     <div style={{ fontFamily: "'Inter', sans-serif" }}>
       <div className="mb-4 phablet:mb-6">
         <h1 className="text-xl phablet:text-2xl font-bold text-gray-900 dark:text-dark-text mb-1">
-          Users & Roles
+          {t("usersRoles.title")}
         </h1>
         <p className="text-sm phablet:text-base text-gray-500 dark:text-dark-text-secondary">
-          Manage platform users and their access permissions.
+          {t("usersRoles.description")}
         </p>
       </div>
 
@@ -437,7 +439,7 @@ const UsersAndRoles = () => {
                 : "text-gray-500 dark:text-dark-text-muted border-transparent hover:text-gray-700 dark:hover:text-dark-text-secondary"
             }`}
           >
-            User Management
+            {t("usersRoles.userManagement")}
           </button>
           <button
             onClick={() => handleTabChange("role")}
@@ -447,7 +449,7 @@ const UsersAndRoles = () => {
                 : "text-gray-500 dark:text-dark-text-muted border-transparent hover:text-gray-700 dark:hover:text-dark-text-secondary"
             }`}
           >
-            Role Management
+            {t("usersRoles.roleManagement")}
           </button>
         </nav>
       </div>
@@ -455,12 +457,14 @@ const UsersAndRoles = () => {
       <div className="bg-white dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-dark-border p-3 phablet:p-4 tablet:p-6">
         <div className="mb-4 phablet:mb-6">
           <h2 className="text-base phablet:text-lg font-semibold text-gray-900 dark:text-dark-text mb-1">
-            {activeTab === "user" ? "User Management" : "Role Management"}
+            {activeTab === "user"
+              ? t("usersRoles.userManagement")
+              : t("usersRoles.roleManagement")}
           </h2>
           <p className="text-xs phablet:text-sm text-gray-500 dark:text-dark-text-secondary">
             {activeTab === "user"
-              ? "Manage and configure user accounts and permissions."
-              : "Create and manage roles with specific permissions."}
+              ? t("usersRoles.description")
+              : t("usersRoles.description")}
           </p>
         </div>
 
@@ -669,22 +673,22 @@ const UsersAndRoles = () => {
                     />
                   </th>
                   <th className="pb-3 px-4 text-left text-sm font-medium text-gray-600 dark:text-dark-text-secondary">
-                    User ID
+                    {t("common.userId")}
                   </th>
                   <th className="pb-3 px-4 text-left text-sm font-medium text-gray-600 dark:text-dark-text-secondary">
-                    User Name
+                    {t("common.userName")}
                   </th>
                   <th className="pb-3 px-4 text-left text-sm font-medium text-gray-600 dark:text-dark-text-secondary">
-                    Email ID
+                    {t("common.emailId")}
                   </th>
                   <th className="pb-3 px-4 text-left text-sm font-medium text-gray-600 dark:text-dark-text-secondary">
-                    Role
+                    {t("common.role")}
                   </th>
                   <th className="pb-3 px-4 text-left text-sm font-medium text-gray-600 dark:text-dark-text-secondary">
-                    Status
+                    {t("common.status")}
                   </th>
                   <th className="pb-3 pl-4 text-left text-sm font-medium text-gray-600 dark:text-dark-text-secondary">
-                    Action
+                    {t("common.action")}
                   </th>
                 </tr>
               </thead>
@@ -718,7 +722,7 @@ const UsersAndRoles = () => {
                             user.role
                           )}`}
                         >
-                          {user.role}
+                          {translateData(user.role)}
                         </span>
                       </td>
                       <td className="py-4 px-4">
@@ -729,7 +733,7 @@ const UsersAndRoles = () => {
                               : "bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400"
                           }`}
                         >
-                          {user.status}
+                          {translateData(user.status)}
                         </span>
                       </td>
                       <td className="py-4 pl-4">
@@ -790,25 +794,25 @@ const UsersAndRoles = () => {
                     />
                   </th>
                   <th className="pb-3 px-4 text-left text-sm font-medium text-gray-600 dark:text-dark-text-secondary">
-                    Role ID
+                    {t("common.roleName")}
                   </th>
                   <th className="pb-3 px-4 text-left text-sm font-medium text-gray-600 dark:text-dark-text-secondary">
-                    Role Name
+                    {t("common.roleName")}
                   </th>
                   <th className="pb-3 px-4 text-left text-sm font-medium text-gray-600 dark:text-dark-text-secondary">
-                    Permissions
+                    {t("usersRoles.permissions")}
                   </th>
                   <th className="pb-3 px-4 text-left text-sm font-medium text-gray-600 dark:text-dark-text-secondary">
-                    Created On
+                    {t("usersRoles.createdOn")}
                   </th>
                   <th className="pb-3 px-4 text-left text-sm font-medium text-gray-600 dark:text-dark-text-secondary">
-                    Last Updated
+                    {t("usersRoles.lastUpdatedOn")}
                   </th>
                   <th className="pb-3 px-4 text-left text-sm font-medium text-gray-600 dark:text-dark-text-secondary">
-                    Status
+                    {t("common.status")}
                   </th>
                   <th className="pb-3 pl-4 text-left text-sm font-medium text-gray-600 dark:text-dark-text-secondary">
-                    Action
+                    {t("common.action")}
                   </th>
                 </tr>
               </thead>
@@ -835,7 +839,7 @@ const UsersAndRoles = () => {
                       </td>
                       <td className="py-4 px-4">
                         <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-100 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-400">
-                          {role.permissions}
+                          {translateData(role.permissions)}
                         </span>
                       </td>
                       <td className="py-4 px-4 text-sm text-gray-600 dark:text-dark-text-secondary">
@@ -852,7 +856,7 @@ const UsersAndRoles = () => {
                               : "bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400"
                           }`}
                         >
-                          {role.status}
+                          {translateData(role.status)}
                         </span>
                       </td>
                       <td className="py-4 pl-4">
@@ -905,7 +909,11 @@ const UsersAndRoles = () => {
       <Modal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
-        title={`Add New ${activeTab === "user" ? "User" : "Role"}`}
+        title={`${t("common.addNew")} ${
+          activeTab === "user"
+            ? t("usersRoles.userManagement").split(" ")[0]
+            : t("common.role")
+        }`}
       >
         <form
           onSubmit={(e) => {
@@ -920,13 +928,16 @@ const UsersAndRoles = () => {
               onClick={() => setIsAddModalOpen(false)}
               className="px-4 py-2 border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-input text-gray-600 dark:text-dark-text-secondary text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-dark-surface-hover"
             >
-              Cancel
+              {t("common.cancel")}
             </button>
             <button
               type="submit"
               className="px-4 py-2 bg-primary hover:bg-primary-hover text-white text-sm font-medium rounded-lg"
             >
-              Add {activeTab === "user" ? "User" : "Role"}
+              {t("common.add")}{" "}
+              {activeTab === "user"
+                ? t("usersRoles.userManagement").split(" ")[0]
+                : t("common.role")}
             </button>
           </div>
         </form>
@@ -935,7 +946,11 @@ const UsersAndRoles = () => {
       <Modal
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
-        title={`Edit ${activeTab === "user" ? "User" : "Role"}`}
+        title={`${t("common.edit")} ${
+          activeTab === "user"
+            ? t("usersRoles.userManagement").split(" ")[0]
+            : t("common.role")
+        }`}
       >
         <form
           onSubmit={(e) => {
@@ -950,13 +965,13 @@ const UsersAndRoles = () => {
               onClick={() => setIsEditModalOpen(false)}
               className="px-4 py-2 border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-input text-gray-600 dark:text-dark-text-secondary text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-dark-surface-hover"
             >
-              Cancel
+              {t("common.cancel")}
             </button>
             <button
               type="submit"
               className="px-4 py-2 bg-primary hover:bg-primary-hover text-white text-sm font-medium rounded-lg"
             >
-              Save Changes
+              {t("common.saveChanges")}
             </button>
           </div>
         </form>
@@ -966,7 +981,11 @@ const UsersAndRoles = () => {
       <Modal
         isOpen={isViewModalOpen}
         onClose={() => setIsViewModalOpen(false)}
-        title={`View ${activeTab === "user" ? "User" : "Role"} Details`}
+        title={`${t("common.viewDetails")} - ${
+          activeTab === "user"
+            ? t("usersRoles.userManagement").split(" ")[0]
+            : t("common.role")
+        }`}
       >
         {selectedItem && (
           <div className="space-y-4">
@@ -1092,7 +1111,7 @@ const UsersAndRoles = () => {
                 onClick={() => setIsViewModalOpen(false)}
                 className="px-4 py-2 border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-input text-gray-600 dark:text-dark-text-secondary text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-dark-surface-hover"
               >
-                Close
+                {t("common.close")}
               </button>
               <button
                 onClick={() => {
@@ -1101,7 +1120,10 @@ const UsersAndRoles = () => {
                 }}
                 className="px-4 py-2 bg-primary hover:bg-primary-hover text-white text-sm font-medium rounded-lg"
               >
-                Edit {activeTab === "user" ? "User" : "Role"}
+                {t("common.edit")}{" "}
+                {activeTab === "user"
+                  ? t("usersRoles.userManagement").split(" ")[0]
+                  : t("common.role")}
               </button>
             </div>
           </div>
@@ -1112,10 +1134,8 @@ const UsersAndRoles = () => {
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={confirmDelete}
-        title={`Delete ${activeTab === "user" ? "User" : "Role"}`}
-        message={`Are you sure you want to delete this ${
-          activeTab === "user" ? "user" : "role"
-        }? This action cannot be undone.`}
+        title={t("common.deleteTitle")}
+        message={t("common.deleteConfirm")}
       />
     </div>
   );

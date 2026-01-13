@@ -10,6 +10,16 @@ import {
   FiChevronDown,
   FiFilter,
 } from "react-icons/fi";
+import { useLanguage } from "../../context/LanguageContext";
+
+// Tab keys for translation
+const tabKeys = {
+  Boards: "dataHub.boards",
+  Classes: "dataHub.classes",
+  Topics: "dataHub.topics",
+  Chapters: "dataHub.chapters",
+  Syllabus: "dataHub.syllabus",
+};
 
 const tabs = ["Boards", "Classes", "Topics", "Chapters", "Syllabus"];
 
@@ -197,11 +207,31 @@ const initialData = {
   ],
 };
 
+// Column translation keys mapping
+const columnTranslationKeys = {
+  Board: "dataHub.board",
+  Class: "dataHub.class",
+  Subject: "dataHub.subject",
+  Chapter: "dataHub.chapter",
+  Topics: "dataHub.topics",
+  Sections: "dataHub.sections",
+  Students: "dataHub.students",
+  Teachers: "dataHub.teachers",
+  Status: "common.status",
+  Action: "common.action",
+  Topic: "common.topic",
+  Resources: "common.resources",
+  Duration: "common.duration",
+  Progress: "common.progress",
+  Syllabus: "dataHub.syllabus",
+  Subjects: "common.subjects",
+  Year: "common.year",
+};
+
 const tabConfig = {
   Boards: {
-    title: "Boards Data",
-    description:
-      "Manage syllabus content by Board, Class, Subject, and Chapter",
+    titleKey: "dataHub.boardsData",
+    descriptionKey: "dataHub.boardsDescription",
     columns: [
       "Board",
       "Class",
@@ -215,8 +245,8 @@ const tabConfig = {
     filterFields: ["board", "class", "subject", "status"],
   },
   Classes: {
-    title: "Classes Data",
-    description: "Manage class levels and their configurations",
+    titleKey: "dataHub.classesData",
+    descriptionKey: "dataHub.classesDescription",
     columns: [
       "Class",
       "Board",
@@ -230,8 +260,8 @@ const tabConfig = {
     filterFields: ["board", "class", "status"],
   },
   Topics: {
-    title: "Topics Data",
-    description: "Manage topics and their learning materials",
+    titleKey: "dataHub.topicsData",
+    descriptionKey: "dataHub.topicsDescription",
     columns: [
       "Topic",
       "Subject",
@@ -245,8 +275,8 @@ const tabConfig = {
     filterFields: ["subject", "chapter", "status"],
   },
   Chapters: {
-    title: "Chapters Data",
-    description: "Manage chapters and their topic organization",
+    titleKey: "dataHub.chaptersData",
+    descriptionKey: "dataHub.chaptersDescription",
     columns: [
       "Chapter",
       "Subject",
@@ -260,8 +290,8 @@ const tabConfig = {
     filterFields: ["subject", "class", "status"],
   },
   Syllabus: {
-    title: "Syllabus Data",
-    description: "Manage syllabus structure and curriculum mapping",
+    titleKey: "dataHub.syllabusData",
+    descriptionKey: "dataHub.syllabusDescription",
     columns: [
       "Syllabus",
       "Board",
@@ -289,9 +319,20 @@ const DataHub = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [formData, setFormData] = useState({});
+  const { t, translateData } = useLanguage();
 
   const currentConfig = tabConfig[activeTab];
   const currentData = data[activeTab];
+
+  // Tab key translations for modal titles
+  const tabKeys = {
+    Boards: "dataHub.board",
+    Classes: "dataHub.class",
+    Topics: "dataHub.topics",
+    Chapters: "dataHub.chapter",
+    Syllabus: "dataHub.syllabus",
+  };
+
   const getFilterOptions = (field) =>
     [...new Set(currentData.map((row) => row[field]))].sort();
   const activeFilterCount = Object.values(filters).filter(
@@ -395,6 +436,28 @@ const DataHub = () => {
     "NIOS",
   ];
 
+  // Field label translation keys
+  const fieldLabelKeys = {
+    board: "dataHub.board",
+    class: "dataHub.class",
+    subject: "dataHub.subject",
+    chapter: "dataHub.chapter",
+    topics: "dataHub.topics",
+    name: "common.name",
+    year: "common.year",
+    sections: "dataHub.sections",
+    students: "dataHub.students",
+    teachers: "dataHub.teachers",
+    duration: "common.duration",
+    resources: "common.resources",
+    description: "common.description",
+  };
+
+  const getFieldLabel = (field) => {
+    const key = fieldLabelKeys[field];
+    return key ? t(key) : field;
+  };
+
   const renderFormFields = () =>
     currentConfig.fields
       .filter((f) => f !== "status")
@@ -404,7 +467,7 @@ const DataHub = () => {
           return (
             <div key={field} className="mb-4">
               <label className="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1 capitalize">
-                {field}
+                {getFieldLabel(field)}
               </label>
               <div className="relative">
                 <select
@@ -414,10 +477,10 @@ const DataHub = () => {
                   }
                   className="w-full px-3 py-2 border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-input text-gray-900 dark:text-dark-text rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary appearance-none cursor-pointer"
                 >
-                  <option value="">Select Class</option>
+                  <option value="">{t("common.selectStatus")}</option>
                   {classOptions.map((option) => (
                     <option key={option} value={option}>
-                      {option}
+                      {translateData(option)}
                     </option>
                   ))}
                 </select>
@@ -432,7 +495,7 @@ const DataHub = () => {
           return (
             <div key={field} className="mb-4">
               <label className="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1 capitalize">
-                {field}
+                {getFieldLabel(field)}
               </label>
               <div className="relative">
                 <select
@@ -442,10 +505,10 @@ const DataHub = () => {
                   }
                   className="w-full px-3 py-2 border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-input text-gray-900 dark:text-dark-text rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary appearance-none cursor-pointer"
                 >
-                  <option value="">Select Board</option>
+                  <option value="">{t("common.selectStatus")}</option>
                   {boardOptions.map((option) => (
                     <option key={option} value={option}>
-                      {option}
+                      {translateData(option)}
                     </option>
                   ))}
                 </select>
@@ -459,7 +522,7 @@ const DataHub = () => {
         return (
           <div key={field} className="mb-4">
             <label className="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1 capitalize">
-              {field}
+              {getFieldLabel(field)}
             </label>
             <input
               type="text"
@@ -468,7 +531,7 @@ const DataHub = () => {
                 setFormData({ ...formData, [field]: e.target.value })
               }
               className="w-full px-3 py-2 border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-input text-gray-900 dark:text-dark-text rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-              placeholder={`Enter ${field}`}
+              placeholder={`${t("common.enterField")} ${getFieldLabel(field)}`}
             />
           </div>
         );
@@ -484,21 +547,22 @@ const DataHub = () => {
               : "bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400"
           }`}
         >
-          {row.status}
+          {translateData(row.status)}
         </span>
       );
     }
-    return row[field];
+    // Translate common data values
+    return translateData(row[field]);
   };
 
   return (
     <div style={{ fontFamily: "'Inter', sans-serif" }}>
       <div className="mb-4 phablet:mb-6">
         <h1 className="text-xl phablet:text-2xl font-bold text-gray-900 dark:text-dark-text mb-1">
-          Master Data Hub
+          {t("dataHub.title")}
         </h1>
         <p className="text-sm phablet:text-base text-gray-500 dark:text-dark-text-secondary">
-          Central repository for all educational content organization.
+          {t("dataHub.description")}
         </p>
       </div>
 
@@ -514,7 +578,7 @@ const DataHub = () => {
                   : "text-gray-500 dark:text-dark-text-muted border-transparent hover:text-gray-700 dark:hover:text-dark-text-secondary"
               }`}
             >
-              {tab}
+              {t(tabKeys[tab])}
             </button>
           ))}
         </nav>
@@ -523,10 +587,10 @@ const DataHub = () => {
       <div className="bg-white dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-dark-border p-3 phablet:p-4 tablet:p-6">
         <div className="mb-4 phablet:mb-6">
           <h2 className="text-base phablet:text-lg font-semibold text-gray-900 dark:text-dark-text mb-1">
-            {currentConfig.title}
+            {t(currentConfig.titleKey)}
           </h2>
           <p className="text-xs phablet:text-sm text-gray-500 dark:text-dark-text-secondary">
-            {currentConfig.description}
+            {t(currentConfig.descriptionKey)}
           </p>
         </div>
 
@@ -554,7 +618,7 @@ const DataHub = () => {
                 }`}
               >
                 <FiFilter className="w-4 h-4" />
-                Filters
+                {t("common.filters")}
                 {activeFilterCount > 0 && (
                   <span className="bg-primary text-white text-xs px-1.5 py-0.5 rounded-full">
                     {activeFilterCount}
@@ -628,7 +692,7 @@ const DataHub = () => {
               className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white text-sm font-medium rounded-lg transition-colors shadow-sm"
             >
               <FiPlus className="w-5 h-5" />
-              Add Entry
+              {t("dataHub.addEntry")}
             </button>
           </div>
         </div>
@@ -679,11 +743,13 @@ const DataHub = () => {
                     key={col}
                     className="pb-3 px-4 text-left text-sm font-medium text-gray-600 dark:text-dark-text-secondary"
                   >
-                    {col}
+                    {columnTranslationKeys[col]
+                      ? t(columnTranslationKeys[col])
+                      : col}
                   </th>
                 ))}
                 <th className="pb-3 pl-4 text-left text-sm font-medium text-gray-600 dark:text-dark-text-secondary">
-                  Action
+                  {t("common.action")}
                 </th>
               </tr>
             </thead>
@@ -765,7 +831,7 @@ const DataHub = () => {
       <Modal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
-        title={`Add New ${activeTab.slice(0, -1)}`}
+        title={`${t("common.addNew")} ${t(tabKeys[activeTab])}`}
       >
         <form
           onSubmit={(e) => {
@@ -776,7 +842,7 @@ const DataHub = () => {
           {renderFormFields()}
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">
-              Status
+              {t("common.status")}
             </label>
             <select
               value={formData.status || "Active"}
@@ -785,8 +851,8 @@ const DataHub = () => {
               }
               className="w-full px-3 py-2 border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-input text-gray-900 dark:text-dark-text rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
             >
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
+              <option value="Active">{t("common.active")}</option>
+              <option value="Inactive">{t("common.inactive")}</option>
             </select>
           </div>
           <div className="flex gap-3 justify-end mt-6">
@@ -795,13 +861,13 @@ const DataHub = () => {
               onClick={() => setIsAddModalOpen(false)}
               className="px-4 py-2 border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-input text-gray-600 dark:text-dark-text-secondary text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-dark-surface-hover"
             >
-              Cancel
+              {t("common.cancel")}
             </button>
             <button
               type="submit"
               className="px-4 py-2 bg-primary hover:bg-primary-hover text-white text-sm font-medium rounded-lg"
             >
-              Add Entry
+              {t("dataHub.addEntry")}
             </button>
           </div>
         </form>
@@ -810,7 +876,7 @@ const DataHub = () => {
       <Modal
         isOpen={isViewModalOpen}
         onClose={() => setIsViewModalOpen(false)}
-        title={`View ${activeTab.slice(0, -1)} Details`}
+        title={`${t("common.viewDetails")} - ${t(tabKeys[activeTab])}`}
       >
         {selectedItem && (
           <div className="space-y-4">
@@ -832,7 +898,7 @@ const DataHub = () => {
                 onClick={() => setIsViewModalOpen(false)}
                 className="px-4 py-2 bg-primary hover:bg-primary-hover text-white text-sm font-medium rounded-lg"
               >
-                Close
+                {t("common.close")}
               </button>
             </div>
           </div>
@@ -842,7 +908,7 @@ const DataHub = () => {
       <Modal
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
-        title={`Edit ${activeTab.slice(0, -1)}`}
+        title={`${t("common.edit")} ${t(tabKeys[activeTab])}`}
       >
         <form
           onSubmit={(e) => {
@@ -853,7 +919,7 @@ const DataHub = () => {
           {renderFormFields()}
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">
-              Status
+              {t("common.status")}
             </label>
             <select
               value={formData.status || "Active"}
@@ -862,8 +928,8 @@ const DataHub = () => {
               }
               className="w-full px-3 py-2 border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-input text-gray-900 dark:text-dark-text rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
             >
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
+              <option value="Active">{t("common.active")}</option>
+              <option value="Inactive">{t("common.inactive")}</option>
             </select>
           </div>
           <div className="flex gap-3 justify-end mt-6">
@@ -872,13 +938,13 @@ const DataHub = () => {
               onClick={() => setIsEditModalOpen(false)}
               className="px-4 py-2 border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-input text-gray-600 dark:text-dark-text-secondary text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-dark-surface-hover"
             >
-              Cancel
+              {t("common.cancel")}
             </button>
             <button
               type="submit"
               className="px-4 py-2 bg-primary hover:bg-primary-hover text-white text-sm font-medium rounded-lg"
             >
-              Save Changes
+              {t("common.saveChanges")}
             </button>
           </div>
         </form>
@@ -888,8 +954,8 @@ const DataHub = () => {
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={confirmDelete}
-        title="Delete Entry"
-        message="Are you sure you want to delete this entry? This action cannot be undone."
+        title={t("common.deleteTitle")}
+        message={t("common.deleteConfirm")}
       />
     </div>
   );

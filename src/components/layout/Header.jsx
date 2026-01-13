@@ -14,22 +14,17 @@ import {
   FiCheck,
 } from "react-icons/fi";
 import { useTheme } from "../../context/ThemeContext";
+import { useLanguage } from "../../context/LanguageContext";
+import ThinkMentorLogo from "../../assets/ThinkMentorLogo";
 
 // Map routes to section names
 const routeToSection = {
-  "/dashboard": "Dashboard",
-  "/data-hub": "Data Hub",
-  "/syllabus": "Syllabus Management",
-  "/users-roles": "Users & Roles",
-  "/settings": "Settings",
+  "/superadmin/dashboard": "Dashboard",
+  "/superadmin/data-hub": "Data Hub",
+  "/superadmin/syllabus": "Syllabus Management",
+  "/superadmin/users-roles": "Users & Roles",
+  "/superadmin/settings": "Settings",
 };
-
-const languages = [
-  { code: "en", name: "English", flag: "🇺🇸" },
-  { code: "hi", name: "हिंदी", flag: "🇮🇳" },
-  { code: "ta", name: "தமிழ்", flag: "🇮🇳" },
-  { code: "te", name: "తెలుగు", flag: "🇮🇳" },
-];
 
 const notifications = [
   {
@@ -57,10 +52,10 @@ const notifications = [
 
 const Header = ({ onMenuClick, isSidebarExpanded }) => {
   const { isDarkMode, toggleTheme } = useTheme();
+  const { language, setLanguage, t, availableLanguages } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
   const [isNotifDropdownOpen, setIsNotifDropdownOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
@@ -99,11 +94,11 @@ const Header = ({ onMenuClick, isSidebarExpanded }) => {
 
   // Get current section name based on route
   const currentSection = routeToSection[location.pathname] || "Dashboard";
-  const currentLang = languages.find((l) => l.code === selectedLanguage);
+  const currentLang = availableLanguages.find((l) => l.code === language);
   const unreadCount = notifications.filter((n) => n.unread).length;
 
   const handleLanguageChange = (langCode) => {
-    setSelectedLanguage(langCode);
+    setLanguage(langCode);
     setIsLangDropdownOpen(false);
   };
 
@@ -122,8 +117,8 @@ const Header = ({ onMenuClick, isSidebarExpanded }) => {
 
   return (
     <header
-      className={`fixed top-0 right-0 h-14 phablet:h-16 bg-white dark:bg-dark-surface border-b border-gray-200 dark:border-dark-border flex items-center justify-between px-3 phablet:px-4 z-30 transition-all duration-300 left-0 ${
-        isSidebarExpanded ? "laptop:left-[260px]" : "laptop:left-[72px]"
+      className={`fixed top-0 right-0 h-14 phablet:h-16 bg-light-surface dark:bg-dark-surface border-b border-light-border dark:border-dark-border flex items-center justify-between px-3 phablet:px-4 z-50 transition-all duration-300 ${
+        isSidebarExpanded ? "left-0 laptop:left-[260px]" : "left-0"
       }`}
       style={{ fontFamily: "'Inter', sans-serif" }}
     >
@@ -137,10 +132,13 @@ const Header = ({ onMenuClick, isSidebarExpanded }) => {
           <FiMenu className="w-5 h-5 phablet:w-6 phablet:h-6" />
         </button>
 
-        {/* Current Section Name - Hidden on very small screens */}
-        <h1 className="text-base phablet:text-lg tablet:text-xl font-semibold text-gray-900 dark:text-dark-text truncate max-w-[120px] phablet:max-w-none">
-          {currentSection}
-        </h1>
+        {/* Brand Name */}
+        <div className="flex items-center gap-2 phablet:gap-3">
+          <ThinkMentorLogo className="w-8 h-8 phablet:w-9 phablet:h-9" />
+          <span className="text-base phablet:text-lg font-bold text-gray-900 dark:text-white">
+            Think<span className="text-[#1B42C1]">Mentor</span>
+          </span>
+        </div>
       </div>
 
       {/* Center - Search - Hidden on mobile, shown on tablet+ */}
@@ -184,7 +182,9 @@ const Header = ({ onMenuClick, isSidebarExpanded }) => {
             className="flex items-center gap-2 px-3 py-2 text-gray-600 dark:text-dark-text-secondary hover:text-gray-900 dark:hover:text-dark-text hover:bg-gray-100 dark:hover:bg-dark-surface-hover rounded-lg transition-colors"
           >
             <FiGlobe className="w-5 h-5" />
-            <span className="text-sm font-medium">{currentLang?.name}</span>
+            <span className="text-sm font-medium">
+              {currentLang?.nativeName || currentLang?.name}
+            </span>
             <FiChevronDown
               className={`w-4 h-4 transition-transform ${
                 isLangDropdownOpen ? "rotate-180" : ""
@@ -194,7 +194,7 @@ const Header = ({ onMenuClick, isSidebarExpanded }) => {
 
           {isLangDropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-dark-border shadow-lg py-2 z-50">
-              {languages.map((lang) => (
+              {availableLanguages.map((lang) => (
                 <button
                   key={lang.code}
                   onClick={() => handleLanguageChange(lang.code)}
@@ -202,9 +202,9 @@ const Header = ({ onMenuClick, isSidebarExpanded }) => {
                 >
                   <span className="flex items-center gap-2">
                     <span>{lang.flag}</span>
-                    <span>{lang.name}</span>
+                    <span>{lang.nativeName}</span>
                   </span>
-                  {selectedLanguage === lang.code && (
+                  {language === lang.code && (
                     <FiCheck className="w-4 h-4 text-indigo-600" />
                   )}
                 </button>
@@ -283,7 +283,7 @@ const Header = ({ onMenuClick, isSidebarExpanded }) => {
             onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
             className="p-1 text-gray-600 dark:text-dark-text-secondary hover:text-gray-900 dark:hover:text-dark-text rounded-full transition-colors"
           >
-            <div className="w-9 h-9 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center ring-2 ring-white dark:ring-dark-surface">
+            <div className="w-9 h-9 bg-linear-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center ring-2 ring-white dark:ring-dark-surface">
               <span className="text-white text-sm font-semibold">SA</span>
             </div>
           </button>
@@ -305,7 +305,7 @@ const Header = ({ onMenuClick, isSidebarExpanded }) => {
                 <button
                   onClick={() => {
                     setIsProfileDropdownOpen(false);
-                    navigate("/settings");
+                    navigate("/superadmin/settings");
                   }}
                   className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-dark-text hover:bg-gray-50 dark:hover:bg-dark-bg transition-colors"
                 >

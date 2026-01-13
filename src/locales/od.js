@@ -1,0 +1,280 @@
+// Odia translations (ଓଡ଼ିଆ)
+const od = {
+  // Common
+  common: {
+    search: "ଖୋଜନ୍ତୁ...",
+    save: "ସଞ୍ଚୟ କରନ୍ତୁ",
+    cancel: "ବାତିଲ କରନ୍ତୁ",
+    delete: "ବିଲୋପ କରନ୍ତୁ",
+    edit: "ସମ୍ପାଦନା କରନ୍ତୁ",
+    add: "ଯୋଡ଼ନ୍ତୁ",
+    view: "ଦେଖନ୍ତୁ",
+    close: "ବନ୍ଦ କରନ୍ତୁ",
+    loading: "ଲୋଡ଼ ହେଉଛି...",
+    noData: "କୌଣସି ତଥ୍ୟ ଉପଲବ୍ଧ ନାହିଁ",
+    actions: "କାର୍ଯ୍ୟ",
+    status: "ସ୍ଥିତି",
+    active: "ସକ୍ରିୟ",
+    inactive: "ନିଷ୍କ୍ରିୟ",
+    name: "ନାମ",
+    email: "ଇମେଲ",
+    role: "ଭୂମିକା",
+    filter: "ଫିଲ୍ଟର",
+    filters: "ଫିଲ୍ଟର",
+    all: "ସମସ୍ତ",
+    confirm: "ନିଶ୍ଚିତ କରନ୍ତୁ",
+    create: "ସୃଷ୍ଟି କରନ୍ତୁ",
+    update: "ଅପଡେଟ କରନ୍ତୁ",
+    reset: "ରିସେଟ କରନ୍ତୁ",
+    action: "କାର୍ଯ୍ୟ",
+    description: "ବିବରଣୀ",
+    activeFilters: "ସକ୍ରିୟ ଫିଲ୍ଟର",
+    userId: "ବ୍ୟବହାରକାରୀ ଆଇଡି",
+    userName: "ବ୍ୟବହାରକାରୀ ନାମ",
+    emailId: "ଇମେଲ ଆଇଡି",
+    roleName: "ଭୂମିକା ନାମ",
+    topic: "ବିଷୟ",
+    resources: "ସମ୍ବଳ",
+    duration: "ଅବଧି",
+    progress: "ପ୍ରଗତି",
+    subjects: "ବିଷୟ",
+    year: "ବର୍ଷ",
+    // Modal labels
+    saveChanges: "ପରିବର୍ତ୍ତନ ସଞ୍ଚୟ କରନ୍ତୁ",
+    addNew: "ନୂଆ ଯୋଡ଼ନ୍ତୁ",
+    viewDetails: "ବିବରଣୀ ଦେଖନ୍ତୁ",
+    editDetails: "ସମ୍ପାଦନା କରନ୍ତୁ",
+    deleteConfirm:
+      "ଆପଣ ନିଶ୍ଚିତ ଯେ ଆପଣ ଏହାକୁ ବିଲୋପ କରିବାକୁ ଚାହୁଁଛନ୍ତି? ଏହି କାର୍ଯ୍ୟ ପୂର୍ବାବସ୍ଥାକୁ ଆଣି ହେବ ନାହିଁ।",
+    deleteTitle: "ବିଲୋପ କରନ୍ତୁ",
+    enterField: "ଦର୍ଜ କରନ୍ତୁ",
+    selectStatus: "ସ୍ଥିତି ଚୟନ କରନ୍ତୁ",
+    password: "ପାସୱାର୍ଡ",
+    confirmPassword: "ପାସୱାର୍ଡ ନିଶ୍ଚିତ କରନ୍ତୁ",
+    phone: "ଫୋନ",
+    address: "ଠିକଣା",
+  },
+
+  // Navigation
+  nav: {
+    dashboard: "ଡ଼ାସବୋର୍ଡ଼",
+    dataHub: "ଡ଼ାଟା ହବ",
+    syllabus: "ପାଠ୍ୟକ୍ରମ",
+    usersRoles: "ବ୍ୟବହାରକାରୀ ଓ ଭୂମିକା",
+    settings: "ସେଟିଂସ",
+    logout: "ଲଗଆଉଟ",
+  },
+
+  // Sections
+  sections: {
+    main: "ମୁଖ୍ୟ",
+    content: "ବିଷୟବସ୍ତୁ",
+    management: "ପରିଚାଳନା",
+    overview: "ସମୀକ୍ଷା",
+    masterData: "ମାଷ୍ଟର ଡ଼ାଟା",
+    administration: "ପ୍ରଶାସନ",
+  },
+
+  // Dashboard
+  dashboard: {
+    title: "ଡ଼ାସବୋର୍ଡ଼",
+    welcome: "ThinkMentor ଆଡମିନ ଡାସବୋର୍ଡରେ ସ୍ୱାଗତ।",
+    totalUsers: "ମୋଟ ବ୍ୟବହାରକାରୀ",
+    activeUsers: "ସକ୍ରିୟ ବ୍ୟବହାରକାରୀ",
+    totalCourses: "ମୋଟ ପାଠ୍ୟକ୍ରମ",
+    completionRate: "ସମାପ୍ତି ହାର",
+    recentActivity: "ସାମ୍ପ୍ରତିକ କାର୍ଯ୍ୟକଳାପ",
+    contentPlaceholder: "ଡ଼ାସବୋର୍ଡ଼ ବିଷୟବସ୍ତୁ ଏଠାରେ ପ୍ରଦର୍ଶିତ ହେବ।",
+  },
+
+  // Data Hub
+  dataHub: {
+    title: "ମାଷ୍ଟର ଡ଼ାଟା ହବ",
+    description: "ସମସ୍ତ ଶିକ୍ଷାମୂଳକ ବିଷୟବସ୍ତୁ ସଂଗଠନ ପାଇଁ କେନ୍ଦ୍ରୀୟ ଭଣ୍ଡାର।",
+    boards: "ବୋର୍ଡ",
+    classes: "ଶ୍ରେଣୀ",
+    topics: "ବିଷୟ",
+    chapters: "ଅଧ୍ୟାୟ",
+    syllabus: "ପାଠ୍ୟକ୍ରମ",
+    addEntry: "ପ୍ରବେଶ ଯୋଡ଼ନ୍ତୁ",
+    searchPlaceholder: "ଖୋଜନ୍ତୁ...",
+    board: "ବୋର୍ଡ",
+    class: "ଶ୍ରେଣୀ",
+    subject: "ବିଷୟ",
+    chapter: "ଅଧ୍ୟାୟ",
+    sections: "ବିଭାଗ",
+    students: "ଛାତ୍ର",
+    teachers: "ଶିକ୍ଷକ",
+    viewEntry: "ପ୍ରବେଶ ଦେଖନ୍ତୁ",
+    editEntry: "ପ୍ରବେଶ ସମ୍ପାଦନା କରନ୍ତୁ",
+    deleteEntry: "ପ୍ରବେଶ ବିଲୋପ କରନ୍ତୁ",
+    noEntries: "କୌଣସି ପ୍ରବେଶ ମିଳିଲା ନାହିଁ",
+    boardsData: "ବୋର୍ଡ ଡ଼ାଟା",
+    boardsDescription:
+      "ବୋର୍ଡ, ଶ୍ରେଣୀ, ବିଷୟ ଓ ଅଧ୍ୟାୟ ଦ୍ୱାରା ପାଠ୍ୟକ୍ରମ ସାମଗ୍ରୀ ପରିଚାଳନା କରନ୍ତୁ",
+    classesData: "ଶ୍ରେଣୀ ଡ଼ାଟା",
+    classesDescription: "ଶ୍ରେଣୀ ସ୍ତର ଓ ସେମାନଙ୍କ କନଫିଗରେସନ ପରିଚାଳନା କରନ୍ତୁ",
+    topicsData: "ବିଷୟ ଡ଼ାଟା",
+    topicsDescription: "ବିଷୟ ଓ ସେମାନଙ୍କ ଶିକ୍ଷଣ ସାମଗ୍ରୀ ପରିଚାଳନା କରନ୍ତୁ",
+    chaptersData: "ଅଧ୍ୟାୟ ଡ଼ାଟା",
+    chaptersDescription: "ଅଧ୍ୟାୟ ଓ ସେମାନଙ୍କ ବିଷୟ ସଂଗଠନ ପରିଚାଳନା କରନ୍ତୁ",
+    syllabusData: "ପାଠ୍ୟକ୍ରମ ଡ଼ାଟା",
+    syllabusDescription: "ପାଠ୍ୟକ୍ରମ ସଂରଚନା ଓ ପାଠ୍ୟକ୍ରମ ମ୍ୟାପିଂ ପରିଚାଳନା କରନ୍ତୁ",
+  },
+
+  // Syllabus
+  syllabus: {
+    title: "ପାଠ୍ୟକ୍ରମ ପରିଚାଳନା",
+    description: "ସମସ୍ତ ଶ୍ରେଣୀ ଓ ବିଷୟରେ ପାଠ୍ୟକ୍ରମ ସୃଷ୍ଟି ଓ ପରିଚାଳନା କରନ୍ତୁ।",
+    createNew: "ନୂଆ ପାଠ୍ୟକ୍ରମ ସୃଷ୍ଟି କରନ୍ତୁ",
+    totalSyllabi: "ମୋଟ ପାଠ୍ୟକ୍ରମ",
+    published: "ପ୍ରକାଶିତ",
+    underReview: "ସମୀକ୍ଷାଧୀନ",
+    draft: "ଡ୍ରାଫ୍ଟ",
+    totalChapters: "ମୋଟ ଅଧ୍ୟାୟ",
+    grade: "ଶ୍ରେଣୀ",
+    curriculum: "ପାଠ୍ୟକ୍ରମ",
+    totalHours: "ମୋଟ ଘଣ୍ଟା",
+    lastUpdated: "ଶେଷ ଅପଡେଟ",
+    assignedTeachers: "ନିଯୁକ୍ତ ଶିକ୍ଷକ",
+    viewSyllabus: "ପାଠ୍ୟକ୍ରମ ଦେଖନ୍ତୁ",
+    editSyllabus: "ପାଠ୍ୟକ୍ରମ ସମ୍ପାଦନା କରନ୍ତୁ",
+    deleteSyllabus: "ପାଠ୍ୟକ୍ରମ ବିଲୋପ କରନ୍ତୁ",
+    noSyllabus: "କୌଣସି ପାଠ୍ୟକ୍ରମ ମିଳିଲା ନାହିଁ",
+    allSubjects: "ସମସ୍ତ ବିଷୟ",
+    allGrades: "ସମସ୍ତ ଶ୍ରେଣୀ",
+  },
+
+  // Users & Roles
+  usersRoles: {
+    title: "ବ୍ୟବହାରକାରୀ ଓ ଭୂମିକା",
+    description:
+      "ପ୍ଲାଟଫର୍ମ ବ୍ୟବହାରକାରୀ ଓ ସେମାନଙ୍କ ଆକ୍ସେସ ଅନୁମତି ପରିଚାଳନା କରନ୍ତୁ।",
+    userManagement: "ବ୍ୟବହାରକାରୀ ପରିଚାଳନା",
+    roleManagement: "ଭୂମିକା ପରିଚାଳନା",
+    addUser: "ବ୍ୟବହାରକାରୀ ଯୋଡ଼ନ୍ତୁ",
+    addRole: "ଭୂମିକା ଯୋଡ଼ନ୍ତୁ",
+    editUser: "ବ୍ୟବହାରକାରୀ ସମ୍ପାଦନା କରନ୍ତୁ",
+    editRole: "ଭୂମିକା ସମ୍ପାଦନା କରନ୍ତୁ",
+    deleteUser: "ବ୍ୟବହାରକାରୀ ବିଲୋପ କରନ୍ତୁ",
+    deleteRole: "ଭୂମିକା ବିଲୋପ କରନ୍ତୁ",
+    viewUser: "ବ୍ୟବହାରକାରୀ ବିବରଣୀ ଦେଖନ୍ତୁ",
+    viewRole: "ଭୂମିକା ବିବରଣୀ ଦେଖନ୍ତୁ",
+    permissions: "ଅନୁମତି",
+    createdOn: "ତିଆରି ତାରିଖ",
+    lastUpdatedOn: "ଶେଷ ଅପଡେଟ",
+    fullAccess: "ସମ୍ପୂର୍ଣ୍ଣ ଆକ୍ସେସ",
+    contentManagement: "ବିଷୟବସ୍ତୁ ପରିଚାଳନା",
+    readOnly: "କେବଳ ପଢ଼ିବା",
+    viewReports: "ରିପୋର୍ଟ ଦେଖନ୍ତୁ",
+    manageProfile: "ପ୍ରୋଫାଇଲ ପରିଚାଳନା କରନ୍ତୁ",
+    admin: "ଆଡମିନ",
+    teacher: "ଶିକ୍ଷକ",
+    student: "ଛାତ୍ର",
+    parent: "ଅଭିଭାବକ",
+    noUsers: "କୌଣସି ବ୍ୟବହାରକାରୀ ମିଳିଲା ନାହିଁ",
+    noRoles: "କୌଣସି ଭୂମିକା ମିଳିଲା ନାହିଁ",
+    userDescription: "ବ୍ୟବହାରକାରୀ ଆକାଉଣ୍ଟ ଓ ଅନୁମତି ପରିଚାଳନା ଓ କନଫିଗର କରନ୍ତୁ।",
+    roleDescription: "ନିର୍ଦ୍ଦିଷ୍ଟ ଅନୁମତି ସହିତ ଭୂମିକା ସୃଷ୍ଟି ଓ ପରିଚାଳନା କରନ୍ତୁ।",
+  },
+
+  // Settings
+  settings: {
+    title: "ସେଟିଂସ",
+    description: "ଆପଣଙ୍କ ପ୍ଲାଟଫର୍ମ ସେଟିଂସ ଓ ପସନ୍ଦ କନଫିଗର କରନ୍ତୁ।",
+    saveChanges: "ପରିବର୍ତ୍ତନ ସଞ୍ଚୟ କରନ୍ତୁ",
+    general: "ସାଧାରଣ",
+    security: "ସୁରକ୍ଷା",
+    notifications: "ବିଜ୍ଞପ୍ତି",
+    system: "ସିଷ୍ଟମ",
+    platformName: "ପ୍ଲାଟଫର୍ମ ନାମ",
+    supportEmail: "ସହାୟତା ଇମେଲ",
+    timezone: "ସମୟ କ୍ଷେତ୍ର",
+    language: "ଡିଫଲ୍ଟ ଭାଷା",
+  },
+
+  // Header
+  header: {
+    toggleSidebar: "ସାଇଡ଼ବାର ଟଗଲ କରନ୍ତୁ",
+    lightMode: "ଲାଇଟ ମୋଡ଼କୁ ସ୍ୱିଚ କରନ୍ତୁ",
+    darkMode: "ଡ଼ାର୍କ ମୋଡ଼କୁ ସ୍ୱିଚ କରନ୍ତୁ",
+    notifications: "ବିଜ୍ଞପ୍ତି",
+    profile: "ପ୍ରୋଫାଇଲ",
+    viewAll: "ସବୁ ଦେଖନ୍ତୁ",
+    markAllRead: "ସବୁ ପଢ଼ିଲେ ବୋଲି ଚିହ୍ନିତ କରନ୍ତୁ",
+  },
+
+  // Languages
+  languages: {
+    english: "English",
+    hindi: "हिंदी",
+    odia: "ଓଡ଼ିଆ",
+  },
+
+  // User
+  user: {
+    superAdmin: "ସୁପର ଆଡମିନ",
+    administrator: "ଆଡମିନିଷ୍ଟ୍ରେଟର",
+  },
+
+  // Table
+  table: {
+    showing: "ଦେଖାଉଛି",
+    of: "ମଧ୍ୟରୁ",
+    entries: "ପ୍ରବେଶ",
+    previous: "ପୂର୍ବ",
+    next: "ପରବର୍ତ୍ତୀ",
+    noResults: "କୌଣସି ଫଳାଫଳ ମିଳିଲା ନାହିଁ",
+  },
+
+  // Data Values (for cell data translation)
+  data: {
+    // Boards
+    cbse: "ସିବିଏସଇ",
+    icse: "ଆଇସିଏସଇ",
+    stateBoard: "ରାଜ୍ୟ ବୋର୍ଡ",
+    // Classes
+    class9: "ଶ୍ରେଣୀ ୯",
+    class10: "ଶ୍ରେଣୀ ୧୦",
+    class11: "ଶ୍ରେଣୀ ୧୧",
+    class12: "ଶ୍ରେଣୀ ୧୨",
+    // Subjects
+    science: "ବିଜ୍ଞାନ",
+    mathematics: "ଗଣିତ",
+    physics: "ପଦାର୍ଥ ବିଜ୍ଞାନ",
+    chemistry: "ରସାୟନ ବିଜ୍ଞାନ",
+    biology: "ଜୀବ ବିଜ୍ଞାନ",
+    english: "ଇଂରାଜୀ",
+    // Chapters
+    chemicalReactions: "ରାସାୟନିକ ପ୍ରତିକ୍ରିୟା",
+    algebra: "ବୀଜଗଣିତ",
+    motion: "ଗତି",
+    organicChemistry: "ଜୈବିକ ରସାୟନ",
+    cellStructure: "କୋଷ ସଂରଚନା",
+    light: "ଆଲୋକ",
+    // Status
+    active: "ସକ୍ରିୟ",
+    inactive: "ନିଷ୍କ୍ରିୟ",
+    published: "ପ୍ରକାଶିତ",
+    draft: "ଡ୍ରାଫ୍ଟ",
+    underReview: "ସମୀକ୍ଷାଧୀନ",
+    // Grades
+    grade9: "ଗ୍ରେଡ ୯",
+    grade10: "ଗ୍ରେଡ ୧୦",
+    grade11: "ଗ୍ରେଡ ୧୧",
+    grade12: "ଗ୍ରେଡ ୧୨",
+    // Roles
+    admin: "ଆଡମିନ",
+    teacher: "ଶିକ୍ଷକ",
+    student: "ଛାତ୍ର",
+    parent: "ଅଭିଭାବକ",
+    administrator: "ଆଡମିନିଷ୍ଟ୍ରେଟର",
+    // Permissions
+    fullAccess: "ସମ୍ପୂର୍ଣ୍ଣ ଆକ୍ସେସ",
+    contentManagement: "ବିଷୟବସ୍ତୁ ପରିଚାଳନା",
+    readOnly: "କେବଳ ପଢ଼ିବା",
+    reportsAnalytics: "ରିପୋର୍ଟ ଓ ବିଶ୍ଳେଷଣ",
+  },
+};
+
+export default od;

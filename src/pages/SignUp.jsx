@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SignUpPageSvg from "../assets/SignUpPage.svg";
+import ThinkMentorLogo from "../assets/ThinkMentorLogo";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -27,22 +28,50 @@ const SignUp = () => {
 
   // Validation functions
   const validateFullName = (name) => {
-    if (!name) {
+    const trimmedName = name.trim();
+    if (!trimmedName) {
       return "Full name is required";
     }
-    if (name.length < 2) {
+    if (trimmedName.length < 2) {
       return "Name must be at least 2 characters";
+    }
+    if (trimmedName.length > 100) {
+      return "Name is too long (max 100 characters)";
+    }
+    // Only allow letters, spaces, hyphens, and apostrophes
+    const nameRegex = /^[a-zA-Z\s'-]+$/;
+    if (!nameRegex.test(trimmedName)) {
+      return "Name can only contain letters, spaces, hyphens, and apostrophes";
+    }
+    // Check for at least one letter
+    if (!/[a-zA-Z]/.test(trimmedName)) {
+      return "Name must contain at least one letter";
     }
     return "";
   };
 
   const validateEmail = (email) => {
-    if (!email) {
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail) {
       return "Email is required";
     }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (trimmedEmail.length > 254) {
+      return "Email is too long (max 254 characters)";
+    }
+    // Comprehensive email regex
+    const emailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    if (!emailRegex.test(trimmedEmail)) {
       return "Please enter a valid email address";
+    }
+    // Check for valid domain extension
+    const domainParts = trimmedEmail.split("@")[1]?.split(".");
+    if (
+      !domainParts ||
+      domainParts.length < 2 ||
+      domainParts[domainParts.length - 1].length < 2
+    ) {
+      return "Please enter a valid email domain";
     }
     return "";
   };
@@ -51,14 +80,28 @@ const SignUp = () => {
     if (!password) {
       return "Password is required";
     }
-    if (password.length < 6) {
-      return "Password must be at least 6 characters";
+    if (password.length < 8) {
+      return "Password must be at least 8 characters";
+    }
+    if (password.length > 128) {
+      return "Password is too long (max 128 characters)";
+    }
+    if (!/[a-z]/.test(password)) {
+      return "Password must contain at least one lowercase letter";
     }
     if (!/[A-Z]/.test(password)) {
       return "Password must contain at least one uppercase letter";
     }
     if (!/[0-9]/.test(password)) {
       return "Password must contain at least one number";
+    }
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+      return 'Password must contain at least one special character (!@#$%^&*(),.?":{}|<>)';
+    }
+    // Check for common weak passwords
+    const weakPasswords = ["password", "12345678", "qwerty123", "admin123"];
+    if (weakPasswords.some((weak) => password.toLowerCase().includes(weak))) {
+      return "Password is too common. Please choose a stronger password";
     }
     return "";
   };
@@ -158,7 +201,7 @@ const SignUp = () => {
     ) {
       console.log("SignUp:", formData);
       // Handle successful signup here
-      navigate("/dashboard");
+      navigate("/superadmin/dashboard");
     }
   };
 
@@ -198,15 +241,7 @@ const SignUp = () => {
           {/* Logo */}
           <div className="text-center mb-4 phablet:mb-6 tablet:mb-8">
             <div className="inline-flex items-center gap-2 mobile-large:gap-3 mb-2">
-              <div className="w-10 h-10 mobile-large:w-12 mobile-large:h-12 bg-amber-500 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/30">
-                <svg
-                  className="w-6 h-6 mobile-large:w-7 mobile-large:h-7 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7zm2.9 11.1l-.9.6V16h-4v-2.3l-.9-.6C7.8 12.2 7 10.6 7 9c0-2.8 2.2-5 5-5s5 2.2 5 5c0 1.6-.8 3.2-2.1 4.1z" />
-                </svg>
-              </div>
+              <ThinkMentorLogo className="w-10 h-10 mobile-large:w-12 mobile-large:h-12" />
               <h1 className="text-xl mobile-large:text-2xl font-bold text-black">
                 Think
                 <span className="text-primary">Mentor</span>

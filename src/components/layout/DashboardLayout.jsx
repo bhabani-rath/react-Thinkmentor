@@ -36,7 +36,7 @@ const DashboardLayout = () => {
 
   return (
     <div
-      className="min-h-screen bg-gray-50 dark:bg-dark-bg transition-colors duration-300"
+      className="min-h-screen bg-light-bg dark:bg-dark-bg transition-colors duration-300"
       style={{ fontFamily: "'Inter', sans-serif" }}
     >
       {/* Mobile Overlay */}
