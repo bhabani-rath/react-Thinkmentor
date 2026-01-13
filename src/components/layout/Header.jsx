@@ -5,7 +5,6 @@ import {
   FiSearch,
   FiGlobe,
   FiBell,
-  FiUser,
   FiChevronDown,
   FiSun,
   FiMoon,
@@ -296,7 +295,7 @@ const Header = ({ onMenuClick, isSidebarExpanded }) => {
                   Super Admin
                 </p>
                 <p className="text-sm text-gray-500 dark:text-dark-text-secondary">
-                  admin@thinkmentor.com
+                  superadmin@thinkmentor.com
                 </p>
               </div>
 

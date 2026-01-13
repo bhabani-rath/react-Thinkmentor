@@ -341,6 +341,45 @@ const Login = () => {
             </form>
           </div>
 
+          {/* Demo Credentials Block */}
+          <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-xl">
+            <div className="flex items-center gap-2 mb-3">
+              <svg
+                className="w-5 h-5 text-amber-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span className="text-sm font-semibold text-amber-800">
+                Super Admin Demo Credentials
+              </span>
+            </div>
+            <div className="space-y-2 text-sm">
+              <div className="flex items-center justify-between bg-white rounded-lg px-3 py-2 border border-amber-100">
+                <span className="text-gray-600">Email:</span>
+                <code className="font-mono text-amber-700 bg-amber-100 px-2 py-0.5 rounded">
+                  superadmin@thinkmentor.com
+                </code>
+              </div>
+              <div className="flex items-center justify-between bg-white rounded-lg px-3 py-2 border border-amber-100">
+                <span className="text-gray-600">Password:</span>
+                <code className="font-mono text-amber-700 bg-amber-100 px-2 py-0.5 rounded">
+                  SuperAdmin@123
+                </code>
+              </div>
+            </div>
+            <p className="text-xs text-amber-600 mt-3 text-center">
+              Use these credentials to explore the Super Admin dashboard
+            </p>
+          </div>
+
           {/* Sign Up Link */}
           <p className="text-center mt-6 text-gray-600">
             Don't have an account?{" "}
