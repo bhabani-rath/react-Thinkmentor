@@ -16,42 +16,197 @@ import { useTheme } from "../../context/ThemeContext";
 import { useLanguage } from "../../context/LanguageContext";
 import ThinkMentorLogo from "../../assets/ThinkMentorLogo";
 
-// Map routes to section names
-const routeToSection = {
-  "/superadmin/dashboard": "Dashboard",
-  "/superadmin/data-hub": "Data Hub",
-  "/superadmin/syllabus": "Syllabus Management",
-  "/superadmin/users-roles": "Users & Roles",
-  "/superadmin/settings": "Settings",
+// Role-specific configurations
+const userConfigs = {
+  superadmin: {
+    name: "Super Admin",
+    email: "superadmin@thinkmentor.com",
+    initials: "SA",
+    color: "from-amber-500 to-amber-600",
+    settingsPath: "/superadmin/settings",
+  },
+  admin: {
+    name: "Admin",
+    email: "admin@thinkmentor.com",
+    initials: "AD",
+    color: "from-blue-500 to-blue-600",
+    settingsPath: "/admin/settings",
+  },
+  adminstrator: {
+    name: "Administrator",
+    email: "administrator@thinkmentor.com",
+    initials: "AM",
+    color: "from-purple-500 to-purple-600",
+    settingsPath: "/adminstrator/settings",
+  },
+  teacher: {
+    name: "Teacher",
+    email: "teacher@thinkmentor.com",
+    initials: "TC",
+    color: "from-green-500 to-green-600",
+    settingsPath: "/teacher/settings",
+  },
+  student: {
+    name: "Student",
+    email: "student@thinkmentor.com",
+    initials: "ST",
+    color: "from-cyan-500 to-cyan-600",
+    settingsPath: "/student/settings",
+  },
+  parent: {
+    name: "Parent",
+    email: "parent@thinkmentor.com",
+    initials: "PT",
+    color: "from-rose-500 to-rose-600",
+    settingsPath: "/parent/settings",
+  },
 };
 
-const notifications = [
-  {
-    id: 1,
-    title: "New user registered",
-    message: "John Doe has registered as a teacher",
-    time: "5 min ago",
-    unread: true,
-  },
-  {
-    id: 2,
-    title: "System update",
-    message: "Platform will undergo maintenance at 2 AM",
-    time: "1 hour ago",
-    unread: true,
-  },
-  {
-    id: 3,
-    title: "Course approved",
-    message: "Mathematics Grade 10 syllabus has been approved",
-    time: "3 hours ago",
-    unread: false,
-  },
-];
+// Role-specific notifications
+const notificationsByRole = {
+  superadmin: [
+    {
+      id: 1,
+      title: "New user registered",
+      message: "John Doe has registered as a teacher",
+      time: "5 min ago",
+      unread: true,
+    },
+    {
+      id: 2,
+      title: "System update",
+      message: "Platform will undergo maintenance at 2 AM",
+      time: "1 hour ago",
+      unread: true,
+    },
+    {
+      id: 3,
+      title: "Course approved",
+      message: "Mathematics Grade 10 syllabus approved",
+      time: "3 hours ago",
+      unread: false,
+    },
+  ],
+  admin: [
+    {
+      id: 1,
+      title: "New enrollment",
+      message: "5 new students enrolled in Grade 10",
+      time: "10 min ago",
+      unread: true,
+    },
+    {
+      id: 2,
+      title: "Teacher request",
+      message: "Mrs. Sharma requested leave",
+      time: "30 min ago",
+      unread: true,
+    },
+    {
+      id: 3,
+      title: "Report ready",
+      message: "Monthly attendance report is ready",
+      time: "2 hours ago",
+      unread: false,
+    },
+  ],
+  adminstrator: [
+    {
+      id: 1,
+      title: "Document pending",
+      message: "3 documents awaiting approval",
+      time: "15 min ago",
+      unread: true,
+    },
+    {
+      id: 2,
+      title: "Task completed",
+      message: "Server backup completed",
+      time: "1 hour ago",
+      unread: false,
+    },
+    {
+      id: 3,
+      title: "Maintenance scheduled",
+      message: "Lab maintenance on Friday",
+      time: "5 hours ago",
+      unread: false,
+    },
+  ],
+  teacher: [
+    {
+      id: 1,
+      title: "Assignment submitted",
+      message: "25 students submitted homework",
+      time: "20 min ago",
+      unread: true,
+    },
+    {
+      id: 2,
+      title: "Class rescheduled",
+      message: "Class 10A moved to Room 204",
+      time: "1 hour ago",
+      unread: true,
+    },
+    {
+      id: 3,
+      title: "Content approved",
+      message: "Your Fractions chapter was approved",
+      time: "3 hours ago",
+      unread: false,
+    },
+  ],
+  student: [
+    {
+      id: 1,
+      title: "New assignment",
+      message: "Mathematics homework due tomorrow",
+      time: "1 hour ago",
+      unread: true,
+    },
+    {
+      id: 2,
+      title: "Grade published",
+      message: "Science test grade is available",
+      time: "2 hours ago",
+      unread: true,
+    },
+    {
+      id: 3,
+      title: "Class reminder",
+      message: "Tomorrow's lab session",
+      time: "5 hours ago",
+      unread: false,
+    },
+  ],
+  parent: [
+    {
+      id: 1,
+      title: "Report card ready",
+      message: "Rahul's report card is ready",
+      time: "30 min ago",
+      unread: true,
+    },
+    {
+      id: 2,
+      title: "Fee reminder",
+      message: "Term fee due in 5 days",
+      time: "2 hours ago",
+      unread: true,
+    },
+    {
+      id: 3,
+      title: "PTM scheduled",
+      message: "Parent-Teacher meeting on Saturday",
+      time: "1 day ago",
+      unread: false,
+    },
+  ],
+};
 
 const Header = ({ onMenuClick, isSidebarExpanded }) => {
   const { isDarkMode, toggleTheme } = useTheme();
-  const { language, setLanguage, t, availableLanguages } = useLanguage();
+  const { language, setLanguage, availableLanguages } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -64,7 +219,23 @@ const Header = ({ onMenuClick, isSidebarExpanded }) => {
   const notifDropdownRef = useRef(null);
   const profileDropdownRef = useRef(null);
 
-  // Close dropdowns when clicking outside
+  // Detect user type from URL
+  const getUserType = () => {
+    const path = location.pathname;
+    if (path.startsWith("/superadmin")) return "superadmin";
+    if (path.startsWith("/admin")) return "admin";
+    if (path.startsWith("/adminstrator")) return "adminstrator";
+    if (path.startsWith("/teacher")) return "teacher";
+    if (path.startsWith("/student")) return "student";
+    if (path.startsWith("/parent")) return "parent";
+    return "superadmin";
+  };
+
+  const userType = getUserType();
+  const currentUserConfig = userConfigs[userType];
+  const notifications =
+    notificationsByRole[userType] || notificationsByRole.superadmin;
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -86,13 +257,10 @@ const Header = ({ onMenuClick, isSidebarExpanded }) => {
         setIsProfileDropdownOpen(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Get current section name based on route
-  const currentSection = routeToSection[location.pathname] || "Dashboard";
   const currentLang = availableLanguages.find((l) => l.code === language);
   const unreadCount = notifications.filter((n) => n.unread).length;
 
@@ -105,13 +273,17 @@ const Header = ({ onMenuClick, isSidebarExpanded }) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       console.log("Searching for:", searchQuery);
-      // Implement search functionality here
     }
   };
 
   const handleLogout = () => {
     setIsProfileDropdownOpen(false);
     navigate("/login");
+  };
+
+  const handleSettings = () => {
+    setIsProfileDropdownOpen(false);
+    navigate(currentUserConfig.settingsPath);
   };
 
   return (
@@ -131,7 +303,6 @@ const Header = ({ onMenuClick, isSidebarExpanded }) => {
           <FiMenu className="w-5 h-5 phablet:w-6 phablet:h-6" />
         </button>
 
-        {/* Brand Name */}
         <div className="flex items-center gap-2 phablet:gap-3">
           <ThinkMentorLogo className="w-8 h-8 phablet:w-9 phablet:h-9" />
           <span className="text-base phablet:text-lg font-bold text-gray-900 dark:text-white">
@@ -140,7 +311,7 @@ const Header = ({ onMenuClick, isSidebarExpanded }) => {
         </div>
       </div>
 
-      {/* Center - Search - Hidden on mobile, shown on tablet+ */}
+      {/* Center - Search */}
       <form
         onSubmit={handleSearch}
         className="hidden tablet:flex flex-1 max-w-xl mx-4 laptop:mx-8"
@@ -175,13 +346,13 @@ const Header = ({ onMenuClick, isSidebarExpanded }) => {
         </button>
 
         {/* Language Selector */}
-        <div className="relative" ref={langDropdownRef}>
+        <div className="relative hidden phablet:block" ref={langDropdownRef}>
           <button
             onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
             className="flex items-center gap-2 px-3 py-2 text-gray-600 dark:text-dark-text-secondary hover:text-gray-900 dark:hover:text-dark-text hover:bg-gray-100 dark:hover:bg-dark-surface-hover rounded-lg transition-colors"
           >
             <FiGlobe className="w-5 h-5" />
-            <span className="text-sm font-medium">
+            <span className="text-sm font-medium hidden laptop:inline">
               {currentLang?.nativeName || currentLang?.name}
             </span>
             <FiChevronDown
@@ -282,30 +453,28 @@ const Header = ({ onMenuClick, isSidebarExpanded }) => {
             onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
             className="p-1 text-gray-600 dark:text-dark-text-secondary hover:text-gray-900 dark:hover:text-dark-text rounded-full transition-colors"
           >
-            <div className="w-9 h-9 bg-linear-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center ring-2 ring-white dark:ring-dark-surface">
-              <span className="text-white text-sm font-semibold">SA</span>
+            <div
+              className={`w-9 h-9 bg-gradient-to-br ${currentUserConfig.color} rounded-full flex items-center justify-center ring-2 ring-white dark:ring-dark-surface`}
+            >
+              <span className="text-white text-sm font-semibold">
+                {currentUserConfig.initials}
+              </span>
             </div>
           </button>
 
           {isProfileDropdownOpen && (
             <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-dark-border shadow-lg z-50 overflow-hidden">
-              {/* User Info */}
               <div className="px-4 py-3 border-b border-gray-200 dark:border-dark-border">
                 <p className="font-medium text-gray-900 dark:text-dark-text">
-                  Super Admin
+                  {currentUserConfig.name}
                 </p>
                 <p className="text-sm text-gray-500 dark:text-dark-text-secondary">
-                  superadmin@thinkmentor.com
+                  {currentUserConfig.email}
                 </p>
               </div>
-
-              {/* Menu Items */}
               <div className="py-2">
                 <button
-                  onClick={() => {
-                    setIsProfileDropdownOpen(false);
-                    navigate("/superadmin/settings");
-                  }}
+                  onClick={handleSettings}
                   className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-dark-text hover:bg-gray-50 dark:hover:bg-dark-bg transition-colors"
                 >
                   <FiSettings className="w-4 h-4" />

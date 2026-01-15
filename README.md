@@ -185,7 +185,7 @@ react-thinkmentor/
 ## ✅ Evaluation Criteria
 
 ### 1. UI Accuracy
-
+------------------------------------
 | Criteria                 | Status |
 | ------------------------ | ------ |
 | Landing page with hero   | ✅     |
@@ -198,7 +198,7 @@ react-thinkmentor/
 | Dark/Light theme         | ✅     |
 
 ### 2. Code Quality
-
+------------------------------------
 | Criteria              | Status |
 | --------------------- | ------ |
 | Component separation  | ✅     |
@@ -209,7 +209,7 @@ react-thinkmentor/
 | Custom SVG components | ✅     |
 
 ### 3. Validation
-
+------------------------------------
 | Criteria                | Status |
 | ----------------------- | ------ |
 | Real-time validation    | ✅     |
@@ -221,7 +221,7 @@ react-thinkmentor/
 | Weak password detection | ✅     |
 
 ### 4. Navigation (Super Admin Routes)
-
+-----------------------------------------------
 | Route                     | Page            |
 | ------------------------- | --------------- |
 | `/`                       | Landing Page    |
@@ -234,7 +234,7 @@ react-thinkmentor/
 | `/superadmin/settings`    | Settings        |
 
 ### 5. Internationalization (i18n)
-
+---------------------
 | Language | Status |
 | -------- | ------ |
 | English  | ✅     |

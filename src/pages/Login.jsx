@@ -116,9 +116,37 @@ const Login = () => {
 
     // If no errors, submit
     if (!emailError && !passwordError) {
-      console.log("Login:", formData);
-      // Handle successful login here
-      navigate("/superadmin/dashboard");
+      if (
+        formData.email === "superadmin@thinkmentor.com" &&
+        formData.password === "Superadmin@123"
+      ) {
+        navigate("/superadmin/dashboard");
+      } else if (
+        formData.email === "admin@thinkmentor.com" &&
+        formData.password === "Admin@123"
+      ) {
+        navigate("/admin/dashboard");
+      } else if (
+        formData.email === "adminstrator@thinkmentor.com" &&
+        formData.password === "Adminstrator@123"
+      ) {
+        navigate("/adminstrator/dashboard");
+      } else if (
+        formData.email === "teacher@thinkmentor.com" &&
+        formData.password === "Teacher@123"
+      ) {
+        navigate("/teacher/dashboard");
+      } else if (
+        formData.email === "student@thinkmentor.com" &&
+        formData.password === "Student@123"
+      ) {
+        navigate("/student/dashboard");
+      } else if (
+        formData.email === "parent@thinkmentor.com" &&
+        formData.password === "Parent@123"
+      ) {
+        navigate("/parent/dashboard");
+      }
     }
   };
 
@@ -342,8 +370,8 @@ const Login = () => {
           </div>
 
           {/* Demo Credentials Block */}
-          <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-xl">
-            <div className="flex items-center gap-2 mb-3">
+          <div className="mt-6 p-4 bg-linear-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-xl">
+            <div className="flex items-center gap-2 mb-4">
               <svg
                 className="w-5 h-5 text-amber-600"
                 fill="none"
@@ -358,25 +386,84 @@ const Login = () => {
                 />
               </svg>
               <span className="text-sm font-semibold text-amber-800">
-                Super Admin Demo Credentials
+                Demo Credentials
+              </span>
+              <span className="text-xs text-amber-600 ml-auto">
+                Click to auto-fill
               </span>
             </div>
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center justify-between bg-white rounded-lg px-3 py-2 border border-amber-100">
-                <span className="text-gray-600">Email:</span>
-                <code className="font-mono text-amber-700 bg-amber-100 px-2 py-0.5 rounded">
-                  superadmin@thinkmentor.com
-                </code>
-              </div>
-              <div className="flex items-center justify-between bg-white rounded-lg px-3 py-2 border border-amber-100">
-                <span className="text-gray-600">Password:</span>
-                <code className="font-mono text-amber-700 bg-amber-100 px-2 py-0.5 rounded">
-                  SuperAdmin@123
-                </code>
-              </div>
+            <div className="grid grid-cols-1 mobile-large:grid-cols-2 gap-2 text-xs">
+              {[
+                {
+                  role: "Super Admin",
+                  email: "superadmin@thinkmentor.com",
+                  password: "Superadmin@123",
+                  color: "bg-purple-100 border-purple-200 hover:bg-purple-200",
+                },
+                {
+                  role: "Admin",
+                  email: "admin@thinkmentor.com",
+                  password: "Admin@123",
+                  color: "bg-blue-100 border-blue-200 hover:bg-blue-200",
+                },
+                {
+                  role: "Administrator",
+                  email: "adminstrator@thinkmentor.com",
+                  password: "Adminstrator@123",
+                  color: "bg-indigo-100 border-indigo-200 hover:bg-indigo-200",
+                },
+                {
+                  role: "Teacher",
+                  email: "teacher@thinkmentor.com",
+                  password: "Teacher@123",
+                  color: "bg-green-100 border-green-200 hover:bg-green-200",
+                },
+                {
+                  role: "Student",
+                  email: "student@thinkmentor.com",
+                  password: "Student@123",
+                  color: "bg-cyan-100 border-cyan-200 hover:bg-cyan-200",
+                },
+                {
+                  role: "Parent",
+                  email: "parent@thinkmentor.com",
+                  password: "Parent@123",
+                  color: "bg-pink-100 border-pink-200 hover:bg-pink-200",
+                },
+              ].map((cred) => (
+                <button
+                  key={cred.role}
+                  type="button"
+                  onClick={() => {
+                    setFormData({ email: cred.email, password: cred.password });
+                    setErrors({ email: "", password: "" });
+                    setTouched({ email: false, password: false });
+                  }}
+                  className={`${cred.color} border rounded-lg px-3 py-2.5 text-left transition-all duration-200 cursor-pointer group`}
+                >
+                  <div className="font-semibold text-gray-800 mb-1 flex items-center gap-1.5">
+                    <svg
+                      className="w-3.5 h-3.5 text-gray-500 group-hover:text-gray-700"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      />
+                    </svg>
+                    {cred.role}
+                  </div>
+                  <div className="text-gray-600 truncate">{cred.email}</div>
+                  <div className="text-gray-500 font-mono">{cred.password}</div>
+                </button>
+              ))}
             </div>
             <p className="text-xs text-amber-600 mt-3 text-center">
-              Use these credentials to explore the Super Admin dashboard
+              Click any role above to auto-fill credentials
             </p>
           </div>
 

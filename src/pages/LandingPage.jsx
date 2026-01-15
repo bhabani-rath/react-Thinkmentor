@@ -4,7 +4,6 @@ import {
   FiBook,
   FiUsers,
   FiAward,
-  FiCheckCircle,
   FiArrowRight,
   FiStar,
   FiZap,
